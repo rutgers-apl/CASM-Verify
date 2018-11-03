@@ -1,0 +1,46 @@
+@Data{P2.rsi:64, P2.rsi:64 ~ P2.rsi:64 + 63:64};
+@Data{P2.rcx:64, P2.rcx:64 ~ P2.rcx:64 + 31:64};
+@Data{P2.r8:64, P2.r8:64 ~ P2.r8:64 + 15:64};
+@Data{P2.rdi:64, P2.rdi:64 ~ P2.rdi:64 + 63:64};
+@Data{P2.rsp:64, P2.rsp:64 - 88:64 ~ P2.rsp:64 - 1:64};
+P2.rsi:64 == 0:64;
+
+
+P2.mem[P2.rcx:64] == P1.key[0];
+P2.mem[P2.rcx:64 + 4:64] == P1.key[1];
+P2.mem[P2.rcx:64 + 8:64] == P1.key[2];
+P2.mem[P2.rcx:64 + 12:64] == P1.key[3];
+P2.mem[P2.rcx:64 + 16:64] == P1.key[4];
+P2.mem[P2.rcx:64 + 20:64] == P1.key[5];
+P2.mem[P2.rcx:64 + 24:64] == P1.key[6];
+P2.mem[P2.rcx:64 + 28:64] == P1.key[7];
+
+P2.mem[P2.r8:64] == P1.nonce[0];
+P2.mem[P2.r8:64 + 4:64] == P1.nonce[1];
+P2.mem[P2.r8:64 + 8:64] == P1.nonce[2];
+P2.mem[P2.r8:64 + 12:64] == P1.nonce[3];
+
+P2.mem[P2.rsi:64] == P1.m[0];
+P2.mem[P2.rsi:64 + 4:64] == P1.m[1];
+P2.mem[P2.rsi:64 + 8:64] == P1.m[2];
+P2.mem[P2.rsi:64 + 12:64] == P1.m[3];
+P2.mem[P2.rsi:64 + 16:64] == P1.m[4];
+P2.mem[P2.rsi:64 + 20:64] == P1.m[5];
+P2.mem[P2.rsi:64 + 24:64] == P1.m[6];
+P2.mem[P2.rsi:64 + 28:64] == P1.m[7];
+P2.mem[P2.rsi:64 + 32:64] == P1.m[8];
+P2.mem[P2.rsi:64 + 36:64] == P1.m[9];
+P2.mem[P2.rsi:64 + 40:64] == P1.m[10];
+P2.mem[P2.rsi:64 + 44:64] == P1.m[11];
+P2.mem[P2.rsi:64 + 48:64] == P1.m[12];
+P2.mem[P2.rsi:64 + 52:64] == P1.m[13];
+P2.mem[P2.rsi:64 + 56:64] == P1.m[14];
+P2.mem[P2.rsi:64 + 60:64] == P1.m[15];
+
+
+P2.xmm4_0 == 1;
+P2.xmm4_1 == 0;
+P2.xmm4_2 == 0;
+P2.xmm4_3 == 0;
+P2.rdx:64 == 64:64;
+P2.edx == 64;

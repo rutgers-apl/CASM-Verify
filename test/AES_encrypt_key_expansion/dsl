@@ -1,0 +1,83 @@
+for (i from 0 to 3) {
+    expandedKey[i] = merge(key:8[(i * 4) + 3], key:8[(i * 4) + 2], key:8[(i * 4) + 1], key:8[(i * 4)]);
+}
+
+temp = expandedKey[3] >>> 8;
+temp = merge(st:8[split(temp, 24, 31)], st:8[split(temp, 16, 23)], st:8[split(temp, 8, 15)], st:8[split(temp, 0, 7)]);
+temp = temp ^ 0x00000001;
+expandedKey[4] = expandedKey[0] ^ temp;
+expandedKey[5] = expandedKey[1] ^ expandedKey[4];
+expandedKey[6] = expandedKey[2] ^ expandedKey[5];
+expandedKey[7] = expandedKey[3] ^ expandedKey[6];
+
+temp = expandedKey[7] >>> 8;
+temp = merge(st:8[split(temp, 24, 31)], st:8[split(temp, 16, 23)], st:8[split(temp, 8, 15)], st:8[split(temp, 0, 7)]);
+temp = temp ^ 0x00000002;
+expandedKey[8] = expandedKey[4] ^ temp;
+expandedKey[9] = expandedKey[5] ^ expandedKey[8];
+expandedKey[10] = expandedKey[6] ^ expandedKey[9];
+expandedKey[11] = expandedKey[7] ^ expandedKey[10];
+
+temp = expandedKey[11] >>> 8;
+temp = merge(st:8[split(temp, 24, 31)], st:8[split(temp, 16, 23)], st:8[split(temp, 8, 15)], st:8[split(temp, 0, 7)]);
+temp = temp ^ 0x00000004;
+expandedKey[12] = expandedKey[8] ^ temp;
+expandedKey[13] = expandedKey[9] ^ expandedKey[12];
+expandedKey[14] = expandedKey[10] ^ expandedKey[13];
+expandedKey[15] = expandedKey[11] ^ expandedKey[14];
+
+temp = expandedKey[15] >>> 8;
+temp = merge(st:8[split(temp, 24, 31)], st:8[split(temp, 16, 23)], st:8[split(temp, 8, 15)], st:8[split(temp, 0, 7)]);
+temp = temp ^ 0x00000008;
+expandedKey[16] = expandedKey[12] ^ temp;
+expandedKey[17] = expandedKey[13] ^ expandedKey[16];
+expandedKey[18] = expandedKey[14] ^ expandedKey[17];
+expandedKey[19] = expandedKey[15] ^ expandedKey[18];
+
+temp = expandedKey[19] >>> 8;
+temp = merge(st:8[split(temp, 24, 31)], st:8[split(temp, 16, 23)], st:8[split(temp, 8, 15)], st:8[split(temp, 0, 7)]);
+temp = temp ^ 0x00000010;
+expandedKey[20] = expandedKey[16] ^ temp;
+expandedKey[21] = expandedKey[17] ^ expandedKey[20];
+expandedKey[22] = expandedKey[18] ^ expandedKey[21];
+expandedKey[23] = expandedKey[19] ^ expandedKey[22];
+
+temp = expandedKey[23] >>> 8;
+temp = merge(st:8[split(temp, 24, 31)], st:8[split(temp, 16, 23)], st:8[split(temp, 8, 15)], st:8[split(temp, 0, 7)]);
+temp = temp ^ 0x00000020;
+expandedKey[24] = expandedKey[20] ^ temp;
+expandedKey[25] = expandedKey[21] ^ expandedKey[24];
+expandedKey[26] = expandedKey[22] ^ expandedKey[25];
+expandedKey[27] = expandedKey[23] ^ expandedKey[26];
+
+temp = expandedKey[27] >>> 8;
+temp = merge(st:8[split(temp, 24, 31)], st:8[split(temp, 16, 23)], st:8[split(temp, 8, 15)], st:8[split(temp, 0, 7)]);
+temp = temp ^ 0x00000040;
+expandedKey[28] = expandedKey[24] ^ temp;
+expandedKey[29] = expandedKey[25] ^ expandedKey[28];
+expandedKey[30] = expandedKey[26] ^ expandedKey[29];
+expandedKey[31] = expandedKey[27] ^ expandedKey[30];
+
+temp = expandedKey[31] >>> 8;
+temp = merge(st:8[split(temp, 24, 31)], st:8[split(temp, 16, 23)], st:8[split(temp, 8, 15)], st:8[split(temp, 0, 7)]);
+temp = temp ^ 0x00000080;
+expandedKey[32] = expandedKey[28] ^ temp;
+expandedKey[33] = expandedKey[29] ^ expandedKey[32];
+expandedKey[34] = expandedKey[30] ^ expandedKey[33];
+expandedKey[35] = expandedKey[31] ^ expandedKey[34];
+
+temp = expandedKey[35] >>> 8;
+temp = merge(st:8[split(temp, 24, 31)], st:8[split(temp, 16, 23)], st:8[split(temp, 8, 15)], st:8[split(temp, 0, 7)]);
+temp = temp ^ 0x0000001b;
+expandedKey[36] = expandedKey[32] ^ temp;
+expandedKey[37] = expandedKey[33] ^ expandedKey[36];
+expandedKey[38] = expandedKey[34] ^ expandedKey[37];
+expandedKey[39] = expandedKey[35] ^ expandedKey[38];
+
+temp = expandedKey[39] >>> 8;
+temp = merge(st:8[split(temp, 24, 31)], st:8[split(temp, 16, 23)], st:8[split(temp, 8, 15)], st:8[split(temp, 0, 7)]);
+temp = temp ^ 0x00000036;
+expandedKey[40] = expandedKey[36] ^ temp;
+expandedKey[41] = expandedKey[37] ^ expandedKey[40];
+expandedKey[42] = expandedKey[38] ^ expandedKey[41];
+expandedKey[43] = expandedKey[39] ^ expandedKey[42];

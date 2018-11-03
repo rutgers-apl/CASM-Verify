@@ -1,0 +1,428 @@
+//.p2align	4
+//_x86_64_AES_set_encrypt_key:
+	movl	%esi,%ecx
+	movq	%rdi,%rsi
+	movq	%rdx,%rdi
+
+	//leaq	L$AES_Te(%rip),%rbp     // set rbp to be the beginning of the table.
+	leaq	2176(%rbp),%rbp
+
+
+	movl	-128(%rbp),%eax
+	movl	-96(%rbp),%ebx
+	movl	-64(%rbp),%r8d
+	movl	-32(%rbp),%edx
+	movl	0(%rbp),%eax
+	movl	32(%rbp),%ebx
+	movl	64(%rbp),%r8d
+	movl	96(%rbp),%edx
+
+	cmpl	$128,%ecx
+//	je	L$10rounds
+
+//L$10rounds:
+	movq	0(%rsi),%rax
+	movq	8(%rsi),%rdx
+	movq	%rax,0(%rdi)
+	movq	%rdx,8(%rdi)
+
+	shrq	$32,%rdx
+	xorl	%ecx,%ecx
+//	jmp	L$10shortcut
+
+//.p2align	2
+//L$10loop:
+//	movl	0(%rdi),%eax
+//	movl	12(%rdi),%edx
+//L$10shortcut:
+	movzbl	%dl,%esi
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$24,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shrl	$16,%edx				
+	movzbl	%dl,%esi
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$8,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shll	$16,%ebx
+	xorl	%ebx,%eax
+
+	xorl	896(%rbp,%rcx,4),%eax
+	movl	%eax,16(%rdi)
+	xorl	4(%rdi),%eax
+	movl	%eax,20(%rdi)
+	xorl	8(%rdi),%eax
+	movl	%eax,24(%rdi)
+	xorl	12(%rdi),%eax
+	movl	%eax,28(%rdi)
+	addl	$1,%ecx
+	leaq	16(%rdi),%rdi
+	cmpl	$10,%ecx
+//	jl	L$10loop
+
+//L$10loop:
+	movl	0(%rdi),%eax
+	movl	12(%rdi),%edx
+//L$10shortcut:
+	movzbl	%dl,%esi
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$24,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shrl	$16,%edx				
+	movzbl	%dl,%esi
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$8,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shll	$16,%ebx
+	xorl	%ebx,%eax
+
+	xorl	896(%rbp,%rcx,4),%eax
+	movl	%eax,16(%rdi)
+	xorl	4(%rdi),%eax
+	movl	%eax,20(%rdi)
+	xorl	8(%rdi),%eax
+	movl	%eax,24(%rdi)
+	xorl	12(%rdi),%eax
+	movl	%eax,28(%rdi)
+	addl	$1,%ecx
+	leaq	16(%rdi),%rdi
+	cmpl	$10,%ecx
+//	jl	L$10loop
+
+
+//L$10loop:
+	movl	0(%rdi),%eax
+	movl	12(%rdi),%edx
+//L$10shortcut:
+	movzbl	%dl,%esi
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$24,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shrl	$16,%edx				
+	movzbl	%dl,%esi
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$8,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shll	$16,%ebx
+	xorl	%ebx,%eax
+
+	xorl	896(%rbp,%rcx,4),%eax
+	movl	%eax,16(%rdi)
+	xorl	4(%rdi),%eax
+	movl	%eax,20(%rdi)
+	xorl	8(%rdi),%eax
+	movl	%eax,24(%rdi)
+	xorl	12(%rdi),%eax
+	movl	%eax,28(%rdi)
+	addl	$1,%ecx
+	leaq	16(%rdi),%rdi
+	cmpl	$10,%ecx
+//	jl	L$10loop
+
+
+//L$10loop:
+	movl	0(%rdi),%eax
+	movl	12(%rdi),%edx
+//L$10shortcut:
+	movzbl	%dl,%esi
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$24,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shrl	$16,%edx				
+	movzbl	%dl,%esi
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$8,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shll	$16,%ebx
+	xorl	%ebx,%eax
+
+	xorl	896(%rbp,%rcx,4),%eax
+	movl	%eax,16(%rdi)
+	xorl	4(%rdi),%eax
+	movl	%eax,20(%rdi)
+	xorl	8(%rdi),%eax
+	movl	%eax,24(%rdi)
+	xorl	12(%rdi),%eax
+	movl	%eax,28(%rdi)
+	addl	$1,%ecx
+	leaq	16(%rdi),%rdi
+	cmpl	$10,%ecx
+//	jl	L$10loop
+
+
+//L$10loop:
+	movl	0(%rdi),%eax
+	movl	12(%rdi),%edx
+//L$10shortcut:
+	movzbl	%dl,%esi
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$24,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shrl	$16,%edx				
+	movzbl	%dl,%esi
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$8,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shll	$16,%ebx
+	xorl	%ebx,%eax
+
+	xorl	896(%rbp,%rcx,4),%eax
+	movl	%eax,16(%rdi)
+	xorl	4(%rdi),%eax
+	movl	%eax,20(%rdi)
+	xorl	8(%rdi),%eax
+	movl	%eax,24(%rdi)
+	xorl	12(%rdi),%eax
+	movl	%eax,28(%rdi)
+	addl	$1,%ecx
+	leaq	16(%rdi),%rdi
+	cmpl	$10,%ecx
+//	jl	L$10loop
+
+
+//L$10loop:
+	movl	0(%rdi),%eax
+	movl	12(%rdi),%edx
+//L$10shortcut:
+	movzbl	%dl,%esi
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$24,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shrl	$16,%edx				
+	movzbl	%dl,%esi
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$8,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shll	$16,%ebx
+	xorl	%ebx,%eax
+
+	xorl	896(%rbp,%rcx,4),%eax
+	cmovnzl	%eax,16(%rdi)				// movl	%eax,16(%rdi)
+	xorl	4(%rdi),%eax
+	movl	%eax,20(%rdi)
+	xorl	8(%rdi),%eax
+	movl	%eax,24(%rdi)
+	xorl	12(%rdi),%eax
+	movl	%eax,28(%rdi)
+	addl	$1,%ecx
+	leaq	16(%rdi),%rdi
+	cmpl	$10,%ecx
+//	jl	L$10loop
+
+
+//L$10loop:
+	movl	0(%rdi),%eax
+	movl	12(%rdi),%edx
+//L$10shortcut:
+	movzbl	%dl,%esi
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$24,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shrl	$16,%edx				
+	movzbl	%dl,%esi
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$8,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shll	$16,%ebx
+	xorl	%ebx,%eax
+
+	xorl	896(%rbp,%rcx,4),%eax
+	movl	%eax,16(%rdi)
+	xorl	4(%rdi),%eax
+	movl	%eax,20(%rdi)
+	xorl	8(%rdi),%eax
+	movl	%eax,24(%rdi)
+	xorl	12(%rdi),%eax
+	movl	%eax,28(%rdi)
+	addl	$1,%ecx
+	leaq	16(%rdi),%rdi
+	cmpl	$10,%ecx
+//	jl	L$10loop
+
+
+//L$10loop:
+	movl	0(%rdi),%eax
+	movl	12(%rdi),%edx
+//L$10shortcut:
+	movzbl	%dl,%esi
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$24,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shrl	$16,%edx				
+	movzbl	%dl,%esi
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$8,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shll	$16,%ebx
+	xorl	%ebx,%eax
+
+	xorl	896(%rbp,%rcx,4),%eax
+	movl	%eax,16(%rdi)
+	xorl	4(%rdi),%eax
+	movl	%eax,20(%rdi)
+	xorl	8(%rdi),%eax
+	movl	%eax,24(%rdi)
+	xorl	12(%rdi),%eax
+	movl	%eax,28(%rdi)
+	addl	$1,%ecx
+	leaq	16(%rdi),%rdi
+	cmpl	$10,%ecx
+//	jl	L$10loop
+
+
+//L$10loop:
+	movl	0(%rdi),%eax
+	movl	12(%rdi),%edx
+//L$10shortcut:
+	movzbl	%dl,%esi
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$24,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shrl	$16,%edx				
+	movzbl	%dl,%esi
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$8,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shll	$16,%ebx
+	xorl	%ebx,%eax
+
+	xorl	896(%rbp,%rcx,4),%eax
+	movl	%eax,16(%rdi)
+	xorl	4(%rdi),%eax
+	movl	%eax,20(%rdi)
+	xorl	8(%rdi),%eax
+	movl	%eax,24(%rdi)
+	xorl	12(%rdi),%eax
+	movl	%eax,28(%rdi)
+	addl	$1,%ecx
+	leaq	16(%rdi),%rdi
+	cmpl	$10,%ecx
+//	jl	L$10loop
+
+
+//L$10loop:
+	movl	0(%rdi),%eax
+	movl	12(%rdi),%edx
+//L$10shortcut:
+	movzbl	%dl,%esi
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$24,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shrl	$16,%edx				
+	movzbl	%dl,%esi
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	movzbl	%dh,%esi
+	shll	$8,%ebx
+	xorl	%ebx,%eax
+
+	movzbl	-128(%rbp,%rsi,1),%ebx
+	shll	$16,%ebx
+	xorl	%ebx,%eax
+
+	xorl	896(%rbp,%rcx,4),%eax
+	movl	%eax,16(%rdi)
+	xorl	4(%rdi),%eax
+	movl	%eax,20(%rdi)
+	xorl	8(%rdi),%eax
+	movl	%eax,24(%rdi)
+	xorl	12(%rdi),%eax
+	movl	%eax,28(%rdi)
+	addl	$1,%ecx
+	leaq	16(%rdi),%rdi
+	cmpl	$10,%ecx
+//	jl	L$10loop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//	movl	$10,80(%rdi)
+//	xorq	%rax,%rax
+//	jmp	L$exit
+

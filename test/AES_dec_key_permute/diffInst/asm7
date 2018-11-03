@@ -1,0 +1,1166 @@
+	leaq	3072(%rip),%rax
+	
+	movq	40(%rax),%rsi
+	movq	48(%rax),%rdi
+	movq	56(%rax),%rbp
+
+	movq	%r8,%r15
+	subl	$1,%r14d
+
+//.p2align	2
+//L$permute:
+	leaq	16(%r15),%r15
+	movq	0(%r15),%rax
+	movq	8(%r15),%rcx
+	movq	%rsi,%r9
+	movq	%rsi,%r12
+	andq	%rax,%r9
+	andq	%rcx,%r12
+	movq	%r9,%rbx
+	movq	%r12,%rdx
+	shrq	$7,%r9
+	leaq	(%rax,%rax,1),%r8
+	shrq	$7,%r12
+	leaq	(%rcx,%rcx,1),%r11
+	subq	%r9,%rbx
+	subq	%r12,%rdx
+	andq	%rdi,%r8
+	andq	%rdi,%r11
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r8
+	xorq	%rdx,%r11
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r8,%r10
+	andq	%r11,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	leaq	(%r8,%r8,1),%r9
+	shrq	$7,%r13
+	leaq	(%r11,%r11,1),%r12
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	andq	%rdi,%r9
+	andq	%rdi,%r12
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r9
+	xorq	%rdx,%r12
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r9,%r10
+	andq	%r12,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	xorq	%rax,%r8
+	shrq	$7,%r13
+	xorq	%rcx,%r11
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	leaq	(%r9,%r9,1),%r10
+	leaq	(%r12,%r12,1),%r13
+	xorq	%rax,%r9
+	xorq	%rcx,%r12
+	andq	%rdi,%r10
+	andq	%rdi,%r13
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r10
+	xorq	%rdx,%r13
+
+	xorq	%r10,%rax
+	xorq	%r13,%rcx
+	xorq	%r10,%r8
+	xorq	%r13,%r11
+	movq	%rax,%rbx
+	movq	%rcx,%rdx
+	xorq	%r10,%r9
+	shrq	$32,%rbx
+	xorq	%r13,%r12
+	shrq	$32,%rdx
+	xorq	%r8,%r10
+	roll	$8,%eax
+	xorq	%r11,%r13
+	roll	$8,%ecx
+	xorq	%r9,%r10
+	roll	$8,%ebx
+	xorq	%r12,%r13
+
+	roll	$8,%edx
+	xorl	%r10d,%eax
+	shrq	$32,%r10
+	xorl	%r13d,%ecx
+	shrq	$32,%r13
+	xorl	%r10d,%ebx
+	xorl	%r13d,%edx
+
+	movq	%r8,%r10
+	roll	$24,%r8d
+	movq	%r11,%r13
+	roll	$24,%r11d
+	shrq	$32,%r10
+	xorl	%r8d,%eax
+	shrq	$32,%r13
+	xorl	%r11d,%ecx
+	roll	$24,%r10d
+	movq	%r9,%r8
+	roll	$24,%r13d
+	movq	%r12,%r11
+	shrq	$32,%r8
+	xorl	%r10d,%ebx
+	shrq	$32,%r11
+	xorl	%r13d,%edx
+
+
+	roll	$16,%r9d
+
+	roll	$16,%r12d
+
+	roll	$16,%r8d
+
+	xorl	%r9d,%eax
+	roll	$16,%r11d
+	xorl	%r12d,%ecx
+
+	xorl	%r8d,%ebx
+	xorl	%r11d,%edx
+	movl	%eax,0(%r15)
+	movl	%ebx,4(%r15)
+	movl	%ecx,8(%r15)
+	movl	%edx,12(%r15)
+	subl	$1,%r14d
+//	jnz	L$permute
+
+//.p2align	2
+//L$permute:
+	leaq	16(%r15),%r15
+	movq	0(%r15),%rax
+	movq	8(%r15),%rcx
+	movq	%rsi,%r9
+	movq	%rsi,%r12
+	andq	%rax,%r9
+	andq	%rcx,%r12
+	movq	%r9,%rbx
+	movq	%r12,%rdx
+	shrq	$7,%r9
+	leaq	(%rax,%rax,1),%r8
+	shrq	$7,%r12
+	leaq	(%rcx,%rcx,1),%r11
+	subq	%r9,%rbx
+	subq	%r12,%rdx
+	andq	%rdi,%r8
+	andq	%rdi,%r11
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r8
+	xorq	%rdx,%r11
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r8,%r10
+	andq	%r11,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	leaq	(%r8,%r8,1),%r9
+	shrq	$7,%r13
+	leaq	(%r11,%r11,1),%r12
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	andq	%rdi,%r9
+	andq	%rdi,%r12
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r9
+	xorq	%rdx,%r12
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r9,%r10
+	andq	%r12,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	xorq	%rax,%r8
+	shrq	$7,%r13
+	xorq	%rcx,%r11
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	leaq	(%r9,%r9,1),%r10
+	leaq	(%r12,%r12,1),%r13
+	xorq	%rax,%r9
+	xorq	%rcx,%r12
+	andq	%rdi,%r10
+	andq	%rdi,%r13
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r10
+	xorq	%rdx,%r13
+
+	xorq	%r10,%rax
+	xorq	%r13,%rcx
+	xorq	%r10,%r8
+	xorq	%r13,%r11
+	movq	%rax,%rbx
+	movq	%rcx,%rdx
+	xorq	%r10,%r9
+	shrq	$32,%rbx
+	xorq	%r13,%r12
+	shrq	$32,%rdx
+	xorq	%r8,%r10
+	roll	$8,%eax
+	xorq	%r11,%r13
+	roll	$8,%ecx
+	xorq	%r9,%r10
+	roll	$8,%ebx
+	xorq	%r12,%r13
+
+	roll	$8,%edx
+	xorl	%r10d,%eax
+	shrq	$32,%r10
+	xorl	%r13d,%ecx
+	shrq	$32,%r13
+	xorl	%r10d,%ebx
+	xorl	%r13d,%edx
+
+	movq	%r8,%r10
+	roll	$24,%r8d
+	movq	%r11,%r13
+	roll	$24,%r11d
+	shrq	$32,%r10
+	xorl	%r8d,%eax
+	shrq	$32,%r13
+	xorl	%r11d,%ecx
+	roll	$24,%r10d
+	movq	%r9,%r8
+	roll	$24,%r13d
+	movq	%r12,%r11
+	shrq	$32,%r8
+	xorl	%r10d,%ebx
+	shrq	$32,%r11
+	xorl	%r13d,%edx
+
+
+	roll	$16,%r9d
+
+	roll	$16,%r12d
+
+	roll	$16,%r8d
+
+	xorl	%r9d,%eax
+	roll	$16,%r11d
+	xorl	%r12d,%ecx
+
+	xorl	%r8d,%ebx
+	xorl	%r11d,%edx
+	movl	%eax,0(%r15)
+	movl	%ebx,4(%r15)
+	movl	%ecx,8(%r15)
+	movl	%edx,12(%r15)
+	subl	$1,%r14d
+//	jnz	L$permute
+
+//.p2align	2
+//L$permute:
+	leaq	16(%r15),%r15
+	movq	0(%r15),%rax
+	movq	8(%r15),%rcx
+	movq	%rsi,%r9
+	movq	%rsi,%r12
+	andq	%rax,%r9
+	andq	%rcx,%r12
+	movq	%r9,%rbx
+	movq	%r12,%rdx
+	shrq	$7,%r9
+	leaq	(%rax,%rax,1),%r8
+	shrq	$7,%r12
+	leaq	(%rcx,%rcx,1),%r11
+	subq	%r9,%rbx
+	subq	%r12,%rdx
+	andq	%rdi,%r8
+	andq	%rdi,%r11
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r8
+	xorq	%rdx,%r11
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r8,%r10
+	andq	%r11,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	leaq	(%r8,%r8,1),%r9
+	shrq	$7,%r13
+	leaq	(%r11,%r11,1),%r12
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	andq	%rdi,%r9
+	andq	%rdi,%r12
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r9
+	xorq	%rdx,%r12
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r9,%r10
+	andq	%r12,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	xorq	%rax,%r8
+	shrq	$7,%r13
+	xorq	%rcx,%r11
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	leaq	(%r9,%r9,1),%r10
+	leaq	(%r12,%r12,1),%r13
+	xorq	%rax,%r9
+	xorq	%rcx,%r12
+	andq	%rdi,%r10
+	andq	%rdi,%r13
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r10
+	xorq	%rdx,%r13
+
+	xorq	%r10,%rax
+	xorq	%r13,%rcx
+	xorq	%r10,%r8
+	xorq	%r13,%r11
+	movq	%rax,%rbx
+	movq	%rcx,%rdx
+	xorq	%r10,%r9
+	shrq	$32,%rbx
+	xorq	%r13,%r12
+	shrq	$32,%rdx
+	xorq	%r8,%r10
+	roll	$8,%eax
+	xorq	%r11,%r13
+	roll	$8,%ecx
+	xorq	%r9,%r10
+	roll	$8,%ebx
+	xorq	%r12,%r13
+
+	roll	$8,%edx
+	xorl	%r10d,%eax
+	shrq	$32,%r10
+	xorl	%r13d,%ecx
+	shrq	$32,%r13
+	xorl	%r10d,%ebx
+	xorl	%r13d,%edx
+
+	movq	%r8,%r10
+	roll	$24,%r8d
+	movq	%r11,%r13
+	roll	$24,%r11d
+	shrq	$32,%r10
+	xorl	%r8d,%eax
+	shrq	$32,%r13
+	xorl	%r11d,%ecx
+	roll	$24,%r10d
+	movq	%r9,%r8
+	roll	$24,%r13d
+	movq	%r12,%r11
+	shrq	$32,%r8
+	xorl	%r10d,%ebx
+	shrq	$32,%r11
+	xorl	%r13d,%edx
+
+
+	roll	$16,%r9d
+
+	roll	$16,%r12d
+
+	roll	$16,%r8d
+
+	xorl	%r9d,%eax
+	roll	$16,%r11d
+	xorl	%r12d,%ecx
+
+	xorl	%r8d,%ebx
+	xorl	%r11d,%edx
+	movl	%eax,0(%r15)
+	movl	%ebx,4(%r15)
+	movl	%ecx,8(%r15)
+	movl	%edx,12(%r15)
+	subl	$1,%r14d
+//	jnz	L$permute
+
+//.p2align	2
+//L$permute:
+	leaq	16(%r15),%r15
+	movq	0(%r15),%rax
+	movq	8(%r15),%rcx
+	movq	%rsi,%r9
+	movq	%rsi,%r12
+	andq	%rax,%r9
+	andq	%rcx,%r12
+	movq	%r9,%rbx
+	movq	%r12,%rdx
+	shrq	$7,%r9
+	leaq	(%rax,%rax,1),%r8
+	shrq	$7,%r12
+	leaq	(%rcx,%rcx,1),%r11
+	subq	%r9,%rbx
+	subq	%r12,%rdx
+	andq	%rdi,%r8
+	andq	%rdi,%r11
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r8
+	xorq	%rdx,%r11
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r8,%r10
+	andq	%r11,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	leaq	(%r8,%r8,1),%r9
+	shrq	$7,%r13
+	leaq	(%r11,%r11,1),%r12
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	andq	%rdi,%r9
+	andq	%rdi,%r12
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r9
+	xorq	%rdx,%r12
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r9,%r10
+	andq	%r12,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	xorq	%rax,%r8
+	shrq	$7,%r13
+	xorq	%rcx,%r11
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	leaq	(%r9,%r9,1),%r10
+	leaq	(%r12,%r12,1),%r13
+	xorq	%rax,%r9
+	xorq	%rcx,%r12
+	andq	%rdi,%r10
+	andq	%rdi,%r13
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r10
+	xorq	%rdx,%r13
+
+	xorq	%r10,%rax
+	xorq	%r13,%rcx
+	xorq	%r10,%r8
+	xorq	%r13,%r11
+	movq	%rax,%rbx
+	movq	%rcx,%rdx
+	xorq	%r10,%r9
+	shrq	$32,%rbx
+	xorq	%r13,%r12
+	shrq	$32,%rdx
+	xorq	%r8,%r10
+	roll	$8,%eax
+	xorq	%r11,%r13
+	roll	$8,%ecx
+	xorq	%r9,%r10
+	roll	$8,%ebx
+	xorq	%r12,%r13
+
+	roll	$8,%edx
+	xorl	%r10d,%eax
+	shrq	$32,%r10
+	xorl	%r13d,%ecx
+	shrq	$32,%r13
+	xorl	%r10d,%ebx
+	xorl	%r13d,%edx
+
+	movq	%r8,%r10
+	roll	$24,%r8d
+	movq	%r11,%r13
+	roll	$24,%r11d
+	shrq	$32,%r10
+	xorl	%r8d,%eax
+	shrq	$32,%r13
+	xorl	%r11d,%ecx
+	roll	$24,%r10d
+	movq	%r9,%r8
+	roll	$24,%r13d
+	movq	%r12,%r11
+	shrq	$32,%r8
+	xorl	%r10d,%ebx
+	shrq	$32,%r11
+	xorl	%r13d,%edx
+
+
+	roll	$16,%r9d
+
+	roll	$16,%r12d
+
+	roll	$16,%r8d
+
+	xorl	%r9d,%eax
+	roll	$16,%r11d
+	xorl	%r12d,%ecx
+
+	xorl	%r8d,%ebx
+	xorl	%r11d,%edx
+	movl	%eax,0(%r15)
+	movl	%ebx,4(%r15)
+	movl	%ecx,8(%r15)
+	movl	%edx,12(%r15)
+	subl	$1,%r14d
+//	jnz	L$permute
+
+//.p2align	2
+//L$permute:
+	leaq	16(%r15),%r15
+	movq	0(%r15),%rax
+	movq	8(%r15),%rcx
+	movq	%rsi,%r9
+	movq	%rsi,%r12
+	andq	%rax,%r9
+	andq	%rcx,%r12
+	movq	%r9,%rbx
+	movq	%r12,%rdx
+	shrq	$7,%r9
+	leaq	(%rax,%rax,1),%r8
+	shrq	$7,%r12
+	leaq	(%rcx,%rcx,1),%r11
+	subq	%r9,%rbx
+	subq	%r12,%rdx
+	andq	%rdi,%r8
+	andq	%rdi,%r11
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r8
+	xorq	%rdx,%r11
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r8,%r10
+	andq	%r11,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	leaq	(%r8,%r8,1),%r9
+	shrq	$7,%r13
+	leaq	(%r11,%r11,1),%r12
+	subq	%r10,%rbx				// CHANGE
+	sbbq	%r13,%rdx				// subq	%r13,%rdx
+	andq	%rdi,%r9
+	andq	%rdi,%r12
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r9
+	xorq	%rdx,%r12
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r9,%r10
+	andq	%r12,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	xorq	%rax,%r8
+	shrq	$7,%r13
+	xorq	%rcx,%r11
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	leaq	(%r9,%r9,1),%r10
+	leaq	(%r12,%r12,1),%r13
+	xorq	%rax,%r9
+	xorq	%rcx,%r12
+	andq	%rdi,%r10
+	andq	%rdi,%r13
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r10
+	xorq	%rdx,%r13
+
+	xorq	%r10,%rax
+	xorq	%r13,%rcx
+	xorq	%r10,%r8
+	xorq	%r13,%r11
+	movq	%rax,%rbx
+	movq	%rcx,%rdx
+	xorq	%r10,%r9
+	shrq	$32,%rbx
+	xorq	%r13,%r12
+	shrq	$32,%rdx
+	xorq	%r8,%r10
+	roll	$8,%eax
+	xorq	%r11,%r13
+	roll	$8,%ecx
+	xorq	%r9,%r10
+	roll	$8,%ebx
+	xorq	%r12,%r13
+
+	roll	$8,%edx
+	xorl	%r10d,%eax
+	shrq	$32,%r10
+	xorl	%r13d,%ecx
+	shrq	$32,%r13
+	xorl	%r10d,%ebx
+	xorl	%r13d,%edx
+
+	movq	%r8,%r10
+	roll	$24,%r8d
+	movq	%r11,%r13
+	roll	$24,%r11d
+	shrq	$32,%r10
+	xorl	%r8d,%eax
+	shrq	$32,%r13
+	xorl	%r11d,%ecx
+	roll	$24,%r10d
+	movq	%r9,%r8
+	roll	$24,%r13d
+	movq	%r12,%r11
+	shrq	$32,%r8
+	xorl	%r10d,%ebx
+	shrq	$32,%r11
+	xorl	%r13d,%edx
+
+
+	roll	$16,%r9d
+
+	roll	$16,%r12d
+
+	roll	$16,%r8d
+
+	xorl	%r9d,%eax
+	roll	$16,%r11d
+	xorl	%r12d,%ecx
+
+	xorl	%r8d,%ebx
+	xorl	%r11d,%edx
+	movl	%eax,0(%r15)
+	movl	%ebx,4(%r15)
+	movl	%ecx,8(%r15)
+	movl	%edx,12(%r15)
+	subl	$1,%r14d
+//	jnz	L$permute
+
+//.p2align	2
+//L$permute:
+	leaq	16(%r15),%r15
+	movq	0(%r15),%rax
+	movq	8(%r15),%rcx
+	movq	%rsi,%r9
+	movq	%rsi,%r12
+	andq	%rax,%r9
+	andq	%rcx,%r12
+	movq	%r9,%rbx
+	movq	%r12,%rdx
+	shrq	$7,%r9
+	leaq	(%rax,%rax,1),%r8
+	shrq	$7,%r12
+	leaq	(%rcx,%rcx,1),%r11
+	subq	%r9,%rbx
+	subq	%r12,%rdx
+	andq	%rdi,%r8
+	andq	%rdi,%r11
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r8
+	xorq	%rdx,%r11
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r8,%r10
+	andq	%r11,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	leaq	(%r8,%r8,1),%r9
+	shrq	$7,%r13
+	leaq	(%r11,%r11,1),%r12
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	andq	%rdi,%r9
+	andq	%rdi,%r12
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r9
+	xorq	%rdx,%r12
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r9,%r10
+	andq	%r12,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	xorq	%rax,%r8
+	shrq	$7,%r13
+	xorq	%rcx,%r11
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	leaq	(%r9,%r9,1),%r10
+	leaq	(%r12,%r12,1),%r13
+	xorq	%rax,%r9
+	xorq	%rcx,%r12
+	andq	%rdi,%r10
+	andq	%rdi,%r13
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r10
+	xorq	%rdx,%r13
+
+	xorq	%r10,%rax
+	xorq	%r13,%rcx
+	xorq	%r10,%r8
+	xorq	%r13,%r11
+	movq	%rax,%rbx
+	movq	%rcx,%rdx
+	xorq	%r10,%r9
+	shrq	$32,%rbx
+	xorq	%r13,%r12
+	shrq	$32,%rdx
+	xorq	%r8,%r10
+	roll	$8,%eax
+	xorq	%r11,%r13
+	roll	$8,%ecx
+	xorq	%r9,%r10
+	roll	$8,%ebx
+	xorq	%r12,%r13
+
+	roll	$8,%edx
+	xorl	%r10d,%eax
+	shrq	$32,%r10
+	xorl	%r13d,%ecx
+	shrq	$32,%r13
+	xorl	%r10d,%ebx
+	xorl	%r13d,%edx
+
+	movq	%r8,%r10
+	roll	$24,%r8d
+	movq	%r11,%r13
+	roll	$24,%r11d
+	shrq	$32,%r10
+	xorl	%r8d,%eax
+	shrq	$32,%r13
+	xorl	%r11d,%ecx
+	roll	$24,%r10d
+	movq	%r9,%r8
+	roll	$24,%r13d
+	movq	%r12,%r11
+	shrq	$32,%r8
+	xorl	%r10d,%ebx
+	shrq	$32,%r11
+	xorl	%r13d,%edx
+
+
+	roll	$16,%r9d
+
+	roll	$16,%r12d
+
+	roll	$16,%r8d
+
+	xorl	%r9d,%eax
+	roll	$16,%r11d
+	xorl	%r12d,%ecx
+
+	xorl	%r8d,%ebx
+	xorl	%r11d,%edx
+	movl	%eax,0(%r15)
+	movl	%ebx,4(%r15)
+	movl	%ecx,8(%r15)
+	movl	%edx,12(%r15)
+	subl	$1,%r14d
+//	jnz	L$permute
+
+//.p2align	2
+//L$permute:
+	leaq	16(%r15),%r15
+	movq	0(%r15),%rax
+	movq	8(%r15),%rcx
+	movq	%rsi,%r9
+	movq	%rsi,%r12
+	andq	%rax,%r9
+	andq	%rcx,%r12
+	movq	%r9,%rbx
+	movq	%r12,%rdx
+	shrq	$7,%r9
+	leaq	(%rax,%rax,1),%r8
+	shrq	$7,%r12
+	leaq	(%rcx,%rcx,1),%r11
+	subq	%r9,%rbx
+	subq	%r12,%rdx
+	andq	%rdi,%r8
+	andq	%rdi,%r11
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r8
+	xorq	%rdx,%r11
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r8,%r10
+	andq	%r11,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	leaq	(%r8,%r8,1),%r9
+	shrq	$7,%r13
+	leaq	(%r11,%r11,1),%r12
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	andq	%rdi,%r9
+	andq	%rdi,%r12
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r9
+	xorq	%rdx,%r12
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r9,%r10
+	andq	%r12,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	xorq	%rax,%r8
+	shrq	$7,%r13
+	xorq	%rcx,%r11
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	leaq	(%r9,%r9,1),%r10
+	leaq	(%r12,%r12,1),%r13
+	xorq	%rax,%r9
+	xorq	%rcx,%r12
+	andq	%rdi,%r10
+	andq	%rdi,%r13
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r10
+	xorq	%rdx,%r13
+
+	xorq	%r10,%rax
+	xorq	%r13,%rcx
+	xorq	%r10,%r8
+	xorq	%r13,%r11
+	movq	%rax,%rbx
+	movq	%rcx,%rdx
+	xorq	%r10,%r9
+	shrq	$32,%rbx
+	xorq	%r13,%r12
+	shrq	$32,%rdx
+	xorq	%r8,%r10
+	roll	$8,%eax
+	xorq	%r11,%r13
+	roll	$8,%ecx
+	xorq	%r9,%r10
+	roll	$8,%ebx
+	xorq	%r12,%r13
+
+	roll	$8,%edx
+	xorl	%r10d,%eax
+	shrq	$32,%r10
+	xorl	%r13d,%ecx
+	shrq	$32,%r13
+	xorl	%r10d,%ebx
+	xorl	%r13d,%edx
+
+	movq	%r8,%r10
+	roll	$24,%r8d
+	movq	%r11,%r13
+	roll	$24,%r11d
+	shrq	$32,%r10
+	xorl	%r8d,%eax
+	shrq	$32,%r13
+	xorl	%r11d,%ecx
+	roll	$24,%r10d
+	movq	%r9,%r8
+	roll	$24,%r13d
+	movq	%r12,%r11
+	shrq	$32,%r8
+	xorl	%r10d,%ebx
+	shrq	$32,%r11
+	xorl	%r13d,%edx
+	roll	$16,%r9d
+	roll	$16,%r12d
+	roll	$16,%r8d
+	xorl	%r9d,%eax
+	roll	$16,%r11d
+	xorl	%r12d,%ecx
+
+	xorl	%r8d,%ebx
+	xorl	%r11d,%edx
+	movl	%eax,0(%r15)
+	movl	%ebx,4(%r15)
+	movl	%ecx,8(%r15)
+	movl	%edx,12(%r15)
+	subl	$1,%r14d
+//	jnz	L$permute
+
+//.p2align	2
+//L$permute:
+	leaq	16(%r15),%r15
+	movq	0(%r15),%rax
+	movq	8(%r15),%rcx
+	movq	%rsi,%r9
+	movq	%rsi,%r12
+	andq	%rax,%r9
+	andq	%rcx,%r12
+	movq	%r9,%rbx
+	movq	%r12,%rdx
+	shrq	$7,%r9
+	leaq	(%rax,%rax,1),%r8
+	shrq	$7,%r12
+	leaq	(%rcx,%rcx,1),%r11
+	subq	%r9,%rbx
+	subq	%r12,%rdx
+	andq	%rdi,%r8
+	andq	%rdi,%r11
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r8
+	xorq	%rdx,%r11
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r8,%r10
+	andq	%r11,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	leaq	(%r8,%r8,1),%r9
+	shrq	$7,%r13
+	leaq	(%r11,%r11,1),%r12
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	andq	%rdi,%r9
+	andq	%rdi,%r12
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r9
+	xorq	%rdx,%r12
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r9,%r10
+	andq	%r12,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	xorq	%rax,%r8
+	shrq	$7,%r13
+	xorq	%rcx,%r11
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	leaq	(%r9,%r9,1),%r10
+	leaq	(%r12,%r12,1),%r13
+	xorq	%rax,%r9
+	xorq	%rcx,%r12
+	andq	%rdi,%r10
+	andq	%rdi,%r13
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r10
+	xorq	%rdx,%r13
+
+	xorq	%r10,%rax
+	xorq	%r13,%rcx
+	xorq	%r10,%r8
+	xorq	%r13,%r11
+	movq	%rax,%rbx
+	movq	%rcx,%rdx
+	xorq	%r10,%r9
+	shrq	$32,%rbx
+	xorq	%r13,%r12
+	shrq	$32,%rdx
+	xorq	%r8,%r10
+	roll	$8,%eax
+	xorq	%r11,%r13
+	roll	$8,%ecx
+	xorq	%r9,%r10
+	roll	$8,%ebx
+	xorq	%r12,%r13
+
+	roll	$8,%edx
+	xorl	%r10d,%eax
+	shrq	$32,%r10
+	xorl	%r13d,%ecx
+	shrq	$32,%r13
+	xorl	%r10d,%ebx
+	xorl	%r13d,%edx
+
+	movq	%r8,%r10
+	roll	$24,%r8d
+	movq	%r11,%r13
+	roll	$24,%r11d
+	shrq	$32,%r10
+	xorl	%r8d,%eax
+	shrq	$32,%r13
+	xorl	%r11d,%ecx
+	roll	$24,%r10d
+	movq	%r9,%r8
+	roll	$24,%r13d
+	movq	%r12,%r11
+	shrq	$32,%r8
+	xorl	%r10d,%ebx
+	shrq	$32,%r11
+	xorl	%r13d,%edx
+
+
+	roll	$16,%r9d
+
+	roll	$16,%r12d
+
+	roll	$16,%r8d
+
+	xorl	%r9d,%eax
+	roll	$16,%r11d
+	xorl	%r12d,%ecx
+
+	xorl	%r8d,%ebx
+	xorl	%r11d,%edx
+	movl	%eax,0(%r15)
+	movl	%ebx,4(%r15)
+	movl	%ecx,8(%r15)
+	movl	%edx,12(%r15)
+	subl	$1,%r14d
+//	jnz	L$permute
+
+//.p2align	2
+//L$permute:
+	leaq	16(%r15),%r15
+	movq	0(%r15),%rax
+	movq	8(%r15),%rcx
+	movq	%rsi,%r9
+	movq	%rsi,%r12
+	andq	%rax,%r9
+	andq	%rcx,%r12
+	movq	%r9,%rbx
+	movq	%r12,%rdx
+	shrq	$7,%r9
+	leaq	(%rax,%rax,1),%r8
+	shrq	$7,%r12
+	leaq	(%rcx,%rcx,1),%r11
+	subq	%r9,%rbx
+	subq	%r12,%rdx
+	andq	%rdi,%r8
+	andq	%rdi,%r11
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r8
+	xorq	%rdx,%r11
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r8,%r10
+	andq	%r11,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	leaq	(%r8,%r8,1),%r9
+	shrq	$7,%r13
+	leaq	(%r11,%r11,1),%r12
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	andq	%rdi,%r9
+	andq	%rdi,%r12
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r9
+	xorq	%rdx,%r12
+	movq	%rsi,%r10
+	movq	%rsi,%r13
+
+	andq	%r9,%r10
+	andq	%r12,%r13
+	movq	%r10,%rbx
+	movq	%r13,%rdx
+	shrq	$7,%r10
+	xorq	%rax,%r8
+	shrq	$7,%r13
+	xorq	%rcx,%r11
+	subq	%r10,%rbx
+	subq	%r13,%rdx
+	leaq	(%r9,%r9,1),%r10
+	leaq	(%r12,%r12,1),%r13
+	xorq	%rax,%r9
+	xorq	%rcx,%r12
+	andq	%rdi,%r10
+	andq	%rdi,%r13
+	andq	%rbp,%rbx
+	andq	%rbp,%rdx
+	xorq	%rbx,%r10
+	xorq	%rdx,%r13
+
+	xorq	%r10,%rax
+	xorq	%r13,%rcx
+	xorq	%r10,%r8
+	xorq	%r13,%r11
+	movq	%rax,%rbx
+	movq	%rcx,%rdx
+	xorq	%r10,%r9
+	shrq	$32,%rbx
+	xorq	%r13,%r12
+	shrq	$32,%rdx
+	xorq	%r8,%r10
+	roll	$8,%eax
+	xorq	%r11,%r13
+	roll	$8,%ecx
+	xorq	%r9,%r10
+	roll	$8,%ebx
+	xorq	%r12,%r13
+
+	roll	$8,%edx
+	xorl	%r10d,%eax
+	shrq	$32,%r10
+	xorl	%r13d,%ecx
+	shrq	$32,%r13
+	xorl	%r10d,%ebx
+	xorl	%r13d,%edx
+
+	movq	%r8,%r10
+	roll	$24,%r8d
+	movq	%r11,%r13
+	roll	$24,%r11d
+	shrq	$32,%r10
+	xorl	%r8d,%eax
+	shrq	$32,%r13
+	xorl	%r11d,%ecx
+	roll	$24,%r10d
+	movq	%r9,%r8
+	roll	$24,%r13d
+	movq	%r12,%r11
+	shrq	$32,%r8
+	xorl	%r10d,%ebx
+	shrq	$32,%r11
+	xorl	%r13d,%edx
+
+
+	roll	$16,%r9d
+
+	roll	$16,%r12d
+
+	roll	$16,%r8d
+
+	xorl	%r9d,%eax
+	roll	$16,%r11d
+	xorl	%r12d,%ecx
+
+	xorl	%r8d,%ebx
+	xorl	%r11d,%edx
+	movl	%eax,0(%r15)
+	movl	%ebx,4(%r15)
+	movl	%ecx,8(%r15)
+	movl	%edx,12(%r15)
+	subl	$1,%r14d
+//	jnz	L$permute
+
+	leaq	-144(%r15),%r15

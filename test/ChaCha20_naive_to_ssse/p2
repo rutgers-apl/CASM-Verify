@@ -1,0 +1,537 @@
+	subq	$88,%rsp
+	// This is where Constants are.
+	// movdqa	L$sigma(%rip),%xmm0	// xmm0 has constants
+	// Specify in Precondition.
+	movdqu	(%rcx),%xmm1			// xmm1 has keys
+	movdqu	16(%rcx),%xmm2			// xmm2 has 2nd part of keys
+	movdqu	(%r8),%xmm3			// xmm3 has nonce
+//	movdqa	L$rot16(%rip),%xmm6		// xmm6 is used for rotating
+//	movdqa	L$rot24(%rip),%xmm7		// xmm7 is used for rotating
+
+	movdqa	%xmm0,0(%rsp)
+	movdqa	%xmm1,16(%rsp)
+	movdqa	%xmm2,32(%rsp)
+	movdqa	%xmm3,48(%rsp)
+	movl	$10,%ebp			// %ebp keeps track of num of rounds
+//	jmp	L$oop_ssse3
+
+//.p2align	5
+//L$oop_outer_ssse3:				// This part only happens if rdx > 64
+//	movdqa	L$one(%rip),%xmm3
+//	movdqa	0(%rsp),%xmm0
+//	movdqa	16(%rsp),%xmm1
+//	movdqa	32(%rsp),%xmm2
+//	paddd	48(%rsp),%xmm3
+//	movl	$10,%ebp
+//	movdqa	%xmm3,48(%rsp)
+//	jmp	L$oop_ssse3
+
+//.p2align	5
+//L$oop_ssse3:					// This is where the loop really begins
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	%xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$57,%xmm1,%xmm1
+	pshufd	$147,%xmm3,%xmm3
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	    %xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$147,%xmm1,%xmm1
+	pshufd	$57,%xmm3,%xmm3
+	decl	%ebp
+//	jnz	L$oop_ssse3			// If we didn't loop 10 times, loop again.
+
+//L$oop_ssse3:					// This is where the loop really begins
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	%xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$57,%xmm1,%xmm1
+	pshufd	$147,%xmm3,%xmm3
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	    %xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$147,%xmm1,%xmm1
+	pshufd	$57,%xmm3,%xmm3
+	decl	%ebp
+//	jnz	L$oop_ssse3			// If we didn't loop 10 times, loop again.
+
+
+//L$oop_ssse3:					// This is where the loop really begins
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	%xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$57,%xmm1,%xmm1
+	pshufd	$147,%xmm3,%xmm3
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	    %xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$147,%xmm1,%xmm1
+	pshufd	$57,%xmm3,%xmm3
+	decl	%ebp
+//	jnz	L$oop_ssse3			// If we didn't loop 10 times, loop again.
+
+
+//L$oop_ssse3:					// This is where the loop really begins
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	%xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$57,%xmm1,%xmm1
+	pshufd	$147,%xmm3,%xmm3
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	    %xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$147,%xmm1,%xmm1
+	pshufd	$57,%xmm3,%xmm3
+	decl	%ebp
+//	jnz	L$oop_ssse3			// If we didn't loop 10 times, loop again.
+
+
+//L$oop_ssse3:					// This is where the loop really begins
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	%xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$57,%xmm1,%xmm1
+	pshufd	$147,%xmm3,%xmm3
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	    %xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$147,%xmm1,%xmm1
+	pshufd	$57,%xmm3,%xmm3
+	decl	%ebp
+//	jnz	L$oop_ssse3			// If we didn't loop 10 times, loop again.
+
+
+//L$oop_ssse3:					// This is where the loop really begins
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	%xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$57,%xmm1,%xmm1
+	pshufd	$147,%xmm3,%xmm3
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	    %xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$147,%xmm1,%xmm1
+	pshufd	$57,%xmm3,%xmm3
+	decl	%ebp
+//	jnz	L$oop_ssse3			// If we didn't loop 10 times, loop again.
+
+
+//L$oop_ssse3:					// This is where the loop really begins
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	%xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$57,%xmm1,%xmm1
+	pshufd	$147,%xmm3,%xmm3
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	    %xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$147,%xmm1,%xmm1
+	pshufd	$57,%xmm3,%xmm3
+	decl	%ebp
+//	jnz	L$oop_ssse3			// If we didn't loop 10 times, loop again.
+
+
+//L$oop_ssse3:					// This is where the loop really begins
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	%xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$57,%xmm1,%xmm1
+	pshufd	$147,%xmm3,%xmm3
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	    %xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$147,%xmm1,%xmm1
+	pshufd	$57,%xmm3,%xmm3
+	decl	%ebp
+//	jnz	L$oop_ssse3			// If we didn't loop 10 times, loop again.
+
+
+//L$oop_ssse3:					// This is where the loop really begins
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	%xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$57,%xmm1,%xmm1
+	pshufd	$147,%xmm3,%xmm3
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	    %xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$147,%xmm1,%xmm1
+	pshufd	$57,%xmm3,%xmm3
+	decl	%ebp
+//	jnz	L$oop_ssse3			// If we didn't loop 10 times, loop again.
+
+
+//L$oop_ssse3:					// This is where the loop really begins
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	%xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$57,%xmm1,%xmm1
+	pshufd	$147,%xmm3,%xmm3
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm6,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$20,%xmm1
+	pslld	$12,%xmm4
+	por	%xmm4,%xmm1
+	paddd	%xmm1,%xmm0
+	pxor	%xmm0,%xmm3
+    	pshufb  %xmm7,%xmm3
+	paddd	%xmm3,%xmm2
+	pxor	%xmm2,%xmm1
+	movdqa	%xmm1,%xmm4
+	psrld	$25,%xmm1
+	pslld	$7,%xmm4
+	por	    %xmm4,%xmm1
+	pshufd	$78,%xmm2,%xmm2
+	pshufd	$147,%xmm1,%xmm1
+	pshufd	$57,%xmm3,%xmm3
+	decl	%ebp
+//	jnz	L$oop_ssse3			// If we didn't loop 10 times, loop again.
+
+
+
+	paddd	0(%rsp),%xmm0			// Add to the original matrix.
+	paddd	16(%rsp),%xmm1
+	paddd	32(%rsp),%xmm2
+	paddd	48(%rsp),%xmm3
+
+//	cmpq	$64,%rdx			// If plaintext < 64, then we add bit by bit.
+//	jb	L$tail_ssse3
+
+	movdqu	0(%rsi),%xmm4			// Otherwise, we add xmm at a time.
+	movdqu	16(%rsi),%xmm5
+	pxor	%xmm4,%xmm0
+	movdqu	32(%rsi),%xmm4
+	pxor	%xmm5,%xmm1
+	movdqu	48(%rsi),%xmm5
+	leaq	64(%rsi),%rsi
+	pxor	%xmm4,%xmm2
+	pxor	%xmm5,%xmm3
+
+	movdqu	%xmm0,0(%rdi)
+	movdqu	%xmm1,16(%rdi)
+	movdqu	%xmm2,32(%rdi)
+	movdqu	%xmm3,48(%rdi)
+	leaq	64(%rdi),%rdi
+
+//	subq	$64,%rdx
+//	jnz	L$oop_outer_ssse3		// If we have more plaintext to encrypt, go back.
+
+//	jmp	L$done_ssse3
+
+//L$done_ssse3:					// Cleanup.
+//	addq	$64+24,%rsp
+//	popq	%r15
+//	popq	%r14
+//	popq	%r13
+//	popq	%r12
+//	popq	%rbp
+//	popq	%rbx
+//	.byte	0xf3,0xc3

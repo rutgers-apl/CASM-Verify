@@ -1,0 +1,87 @@
+@Data{P2.rip:64, P2.rip:64 ~ P2.rip:64 + 4095:64};
+@Data{P2.r8:64, P2.r8:64 ~ P2.r8:64 + 243:64};
+P2.rip:64 == 0:64;
+
+P2.mem:8[P2.rip:64 + 3112:64] == 0x80:8;
+P2.mem:8[P2.rip:64 + 3113:64] == 0x80:8;
+P2.mem:8[P2.rip:64 + 3114:64] == 0x80:8;
+P2.mem:8[P2.rip:64 + 3115:64] == 0x80:8;
+P2.mem:8[P2.rip:64 + 3116:64] == 0x80:8;
+P2.mem:8[P2.rip:64 + 3117:64] == 0x80:8;
+P2.mem:8[P2.rip:64 + 3118:64] == 0x80:8;
+P2.mem:8[P2.rip:64 + 3119:64] == 0x80:8;
+
+P2.mem:8[P2.rip:64 + 3120:64] == 0xfe:8;
+P2.mem:8[P2.rip:64 + 3121:64] == 0xfe:8;
+P2.mem:8[P2.rip:64 + 3122:64] == 0xfe:8;
+P2.mem:8[P2.rip:64 + 3123:64] == 0xfe:8;
+P2.mem:8[P2.rip:64 + 3124:64] == 0xfe:8;
+P2.mem:8[P2.rip:64 + 3125:64] == 0xfe:8;
+P2.mem:8[P2.rip:64 + 3126:64] == 0xfe:8;
+P2.mem:8[P2.rip:64 + 3127:64] == 0xfe:8;
+
+P2.mem:8[P2.rip:64 + 3128:64] == 0x1b:8;
+P2.mem:8[P2.rip:64 + 3129:64] == 0x1b:8;
+P2.mem:8[P2.rip:64 + 3130:64] == 0x1b:8;
+P2.mem:8[P2.rip:64 + 3131:64] == 0x1b:8;
+P2.mem:8[P2.rip:64 + 3132:64] == 0x1b:8;
+P2.mem:8[P2.rip:64 + 3133:64] == 0x1b:8;
+P2.mem:8[P2.rip:64 + 3134:64] == 0x1b:8;
+P2.mem:8[P2.rip:64 + 3135:64] == 0x1b:8;
+
+merge(P2.mem:8[P2.r8:64 + 3:64], P2.mem:8[P2.r8:64 + 2:64], P2.mem:8[P2.r8:64 + 1:64], P2.mem:8[P2.r8:64]) == P1.expandedKey[0];
+merge(P2.mem:8[P2.r8:64 + 7:64], P2.mem:8[P2.r8:64 + 6:64], P2.mem:8[P2.r8:64 + 5:64], P2.mem:8[P2.r8:64 + 4:64]) == P1.expandedKey[1];
+merge(P2.mem:8[P2.r8:64 + 11:64], P2.mem:8[P2.r8:64 + 10:64], P2.mem:8[P2.r8:64 + 9:64], P2.mem:8[P2.r8:64 + 8:64]) == P1.expandedKey[2];
+merge(P2.mem:8[P2.r8:64 + 15:64], P2.mem:8[P2.r8:64 + 14:64], P2.mem:8[P2.r8:64 + 13:64], P2.mem:8[P2.r8:64 + 12:64]) == P1.expandedKey[3];
+
+merge(P2.mem:8[P2.r8:64 + 19:64], P2.mem:8[P2.r8:64 + 18:64], P2.mem:8[P2.r8:64 + 17:64], P2.mem:8[P2.r8:64 + 16:64]) == P1.expandedKey[4];
+merge(P2.mem:8[P2.r8:64 + 23:64], P2.mem:8[P2.r8:64 + 22:64], P2.mem:8[P2.r8:64 + 21:64], P2.mem:8[P2.r8:64 + 20:64]) == P1.expandedKey[5];
+merge(P2.mem:8[P2.r8:64 + 27:64], P2.mem:8[P2.r8:64 + 26:64], P2.mem:8[P2.r8:64 + 25:64], P2.mem:8[P2.r8:64 + 24:64]) == P1.expandedKey[6];
+merge(P2.mem:8[P2.r8:64 + 31:64], P2.mem:8[P2.r8:64 + 30:64], P2.mem:8[P2.r8:64 + 29:64], P2.mem:8[P2.r8:64 + 28:64]) == P1.expandedKey[7];
+
+merge(P2.mem:8[P2.r8:64 + 35:64], P2.mem:8[P2.r8:64 + 34:64], P2.mem:8[P2.r8:64 + 33:64], P2.mem:8[P2.r8:64 + 32:64]) == P1.expandedKey[8];
+merge(P2.mem:8[P2.r8:64 + 39:64], P2.mem:8[P2.r8:64 + 38:64], P2.mem:8[P2.r8:64 + 37:64], P2.mem:8[P2.r8:64 + 36:64]) == P1.expandedKey[9];
+merge(P2.mem:8[P2.r8:64 + 43:64], P2.mem:8[P2.r8:64 + 42:64], P2.mem:8[P2.r8:64 + 41:64], P2.mem:8[P2.r8:64 + 40:64]) == P1.expandedKey[10];
+merge(P2.mem:8[P2.r8:64 + 47:64], P2.mem:8[P2.r8:64 + 46:64], P2.mem:8[P2.r8:64 + 45:64], P2.mem:8[P2.r8:64 + 44:64]) == P1.expandedKey[11];
+
+merge(P2.mem:8[P2.r8:64 + 51:64], P2.mem:8[P2.r8:64 + 50:64], P2.mem:8[P2.r8:64 + 49:64], P2.mem:8[P2.r8:64 + 48:64]) == P1.expandedKey[12];
+merge(P2.mem:8[P2.r8:64 + 55:64], P2.mem:8[P2.r8:64 + 54:64], P2.mem:8[P2.r8:64 + 53:64], P2.mem:8[P2.r8:64 + 52:64]) == P1.expandedKey[13];
+merge(P2.mem:8[P2.r8:64 + 59:64], P2.mem:8[P2.r8:64 + 58:64], P2.mem:8[P2.r8:64 + 57:64], P2.mem:8[P2.r8:64 + 56:64]) == P1.expandedKey[14];
+merge(P2.mem:8[P2.r8:64 + 63:64], P2.mem:8[P2.r8:64 + 62:64], P2.mem:8[P2.r8:64 + 61:64], P2.mem:8[P2.r8:64 + 60:64]) == P1.expandedKey[15];
+
+merge(P2.mem:8[P2.r8:64 + 67:64], P2.mem:8[P2.r8:64 + 66:64], P2.mem:8[P2.r8:64 + 65:64], P2.mem:8[P2.r8:64 + 64:64]) == P1.expandedKey[16];
+merge(P2.mem:8[P2.r8:64 + 71:64], P2.mem:8[P2.r8:64 + 70:64], P2.mem:8[P2.r8:64 + 69:64], P2.mem:8[P2.r8:64 + 68:64]) == P1.expandedKey[17];
+merge(P2.mem:8[P2.r8:64 + 75:64], P2.mem:8[P2.r8:64 + 74:64], P2.mem:8[P2.r8:64 + 73:64], P2.mem:8[P2.r8:64 + 72:64]) == P1.expandedKey[18];
+merge(P2.mem:8[P2.r8:64 + 79:64], P2.mem:8[P2.r8:64 + 78:64], P2.mem:8[P2.r8:64 + 77:64], P2.mem:8[P2.r8:64 + 76:64]) == P1.expandedKey[19];
+
+merge(P2.mem:8[P2.r8:64 + 83:64], P2.mem:8[P2.r8:64 + 82:64], P2.mem:8[P2.r8:64 + 81:64], P2.mem:8[P2.r8:64 + 80:64]) == P1.expandedKey[20];
+merge(P2.mem:8[P2.r8:64 + 87:64], P2.mem:8[P2.r8:64 + 86:64], P2.mem:8[P2.r8:64 + 85:64], P2.mem:8[P2.r8:64 + 84:64]) == P1.expandedKey[21];
+merge(P2.mem:8[P2.r8:64 + 91:64], P2.mem:8[P2.r8:64 + 90:64], P2.mem:8[P2.r8:64 + 89:64], P2.mem:8[P2.r8:64 + 88:64]) == P1.expandedKey[22];
+merge(P2.mem:8[P2.r8:64 + 95:64], P2.mem:8[P2.r8:64 + 94:64], P2.mem:8[P2.r8:64 + 93:64], P2.mem:8[P2.r8:64 + 92:64]) == P1.expandedKey[23];
+
+merge(P2.mem:8[P2.r8:64 + 99:64], P2.mem:8[P2.r8:64 + 98:64], P2.mem:8[P2.r8:64 + 97:64], P2.mem:8[P2.r8:64 + 96:64]) == P1.expandedKey[24];
+merge(P2.mem:8[P2.r8:64 + 103:64], P2.mem:8[P2.r8:64 + 102:64], P2.mem:8[P2.r8:64 + 101:64], P2.mem:8[P2.r8:64 + 100:64]) == P1.expandedKey[25];
+merge(P2.mem:8[P2.r8:64 + 107:64], P2.mem:8[P2.r8:64 + 106:64], P2.mem:8[P2.r8:64 + 105:64], P2.mem:8[P2.r8:64 + 104:64]) == P1.expandedKey[26];
+merge(P2.mem:8[P2.r8:64 + 111:64], P2.mem:8[P2.r8:64 + 110:64], P2.mem:8[P2.r8:64 + 109:64], P2.mem:8[P2.r8:64 + 108:64]) == P1.expandedKey[27];
+
+merge(P2.mem:8[P2.r8:64 + 115:64], P2.mem:8[P2.r8:64 + 114:64], P2.mem:8[P2.r8:64 + 113:64], P2.mem:8[P2.r8:64 + 112:64]) == P1.expandedKey[28];
+merge(P2.mem:8[P2.r8:64 + 119:64], P2.mem:8[P2.r8:64 + 118:64], P2.mem:8[P2.r8:64 + 117:64], P2.mem:8[P2.r8:64 + 116:64]) == P1.expandedKey[29];
+merge(P2.mem:8[P2.r8:64 + 123:64], P2.mem:8[P2.r8:64 + 122:64], P2.mem:8[P2.r8:64 + 121:64], P2.mem:8[P2.r8:64 + 120:64]) == P1.expandedKey[30];
+merge(P2.mem:8[P2.r8:64 + 127:64], P2.mem:8[P2.r8:64 + 126:64], P2.mem:8[P2.r8:64 + 125:64], P2.mem:8[P2.r8:64 + 124:64]) == P1.expandedKey[31];
+
+merge(P2.mem:8[P2.r8:64 + 131:64], P2.mem:8[P2.r8:64 + 130:64], P2.mem:8[P2.r8:64 + 129:64], P2.mem:8[P2.r8:64 + 128:64]) == P1.expandedKey[32];
+merge(P2.mem:8[P2.r8:64 + 135:64], P2.mem:8[P2.r8:64 + 134:64], P2.mem:8[P2.r8:64 + 133:64], P2.mem:8[P2.r8:64 + 132:64]) == P1.expandedKey[33];
+merge(P2.mem:8[P2.r8:64 + 139:64], P2.mem:8[P2.r8:64 + 138:64], P2.mem:8[P2.r8:64 + 137:64], P2.mem:8[P2.r8:64 + 136:64]) == P1.expandedKey[34];
+merge(P2.mem:8[P2.r8:64 + 143:64], P2.mem:8[P2.r8:64 + 142:64], P2.mem:8[P2.r8:64 + 141:64], P2.mem:8[P2.r8:64 + 140:64]) == P1.expandedKey[35];
+
+merge(P2.mem:8[P2.r8:64 + 147:64], P2.mem:8[P2.r8:64 + 146:64], P2.mem:8[P2.r8:64 + 145:64], P2.mem:8[P2.r8:64 + 144:64]) == P1.expandedKey[36];
+merge(P2.mem:8[P2.r8:64 + 151:64], P2.mem:8[P2.r8:64 + 150:64], P2.mem:8[P2.r8:64 + 149:64], P2.mem:8[P2.r8:64 + 148:64]) == P1.expandedKey[37];
+merge(P2.mem:8[P2.r8:64 + 155:64], P2.mem:8[P2.r8:64 + 154:64], P2.mem:8[P2.r8:64 + 153:64], P2.mem:8[P2.r8:64 + 152:64]) == P1.expandedKey[38];
+merge(P2.mem:8[P2.r8:64 + 159:64], P2.mem:8[P2.r8:64 + 158:64], P2.mem:8[P2.r8:64 + 157:64], P2.mem:8[P2.r8:64 + 156:64]) == P1.expandedKey[39];
+
+merge(P2.mem:8[P2.r8:64 + 163:64], P2.mem:8[P2.r8:64 + 162:64], P2.mem:8[P2.r8:64 + 161:64], P2.mem:8[P2.r8:64 + 160:64]) == P1.expandedKey[40];
+merge(P2.mem:8[P2.r8:64 + 167:64], P2.mem:8[P2.r8:64 + 166:64], P2.mem:8[P2.r8:64 + 165:64], P2.mem:8[P2.r8:64 + 164:64]) == P1.expandedKey[41];
+merge(P2.mem:8[P2.r8:64 + 171:64], P2.mem:8[P2.r8:64 + 170:64], P2.mem:8[P2.r8:64 + 169:64], P2.mem:8[P2.r8:64 + 168:64]) == P1.expandedKey[42];
+merge(P2.mem:8[P2.r8:64 + 175:64], P2.mem:8[P2.r8:64 + 174:64], P2.mem:8[P2.r8:64 + 173:64], P2.mem:8[P2.r8:64 + 172:64]) == P1.expandedKey[43];
+
+merge(P2.mem:8[P2.r8:64 + 243:64], P2.mem:8[P2.r8:64 + 242:64], P2.mem:8[P2.r8:64 + 241:64], P2.mem:8[P2.r8:64 + 240:64]) == 10;

@@ -1,0 +1,4 @@
+P1.s0 == P2.eax;
+P1.s1 == P2.ebx;
+P1.s2 == P2.ecx;
+P1.s3 == P2.edx;

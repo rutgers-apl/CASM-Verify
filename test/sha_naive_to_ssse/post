@@ -1,0 +1,8 @@
+P1.mem[P1.rdi:64] == P2.mem[P2.rdi:64];
+P1.mem[P1.rdi:64 + 4:64] == P2.mem[P2.rdi:64 + 4:64];
+P1.mem[P1.rdi:64 + 8:64] == P2.mem[P2.rdi:64 + 8:64];
+P1.mem[P1.rdi:64 + 12:64] == P2.mem[P2.rdi:64 + 12:64];
+P1.mem[P1.rdi:64 + 16:64] == P2.mem[P2.rdi:64 + 16:64];
+P1.mem[P1.rdi:64 + 20:64] == P2.mem[P2.rdi:64 + 20:64];
+P1.mem[P1.rdi:64 + 24:64] == P2.mem[P2.rdi:64 + 24:64];
+P1.mem[P1.rdi:64 + 28:64] == P2.mem[P2.rdi:64 + 28:64];

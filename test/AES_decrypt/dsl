@@ -1,0 +1,45 @@
+s0 = s0 ^ k[0];
+s1 = s1 ^ k[1];
+s2 = s2 ^ k[2];
+s3 = s3 ^ k[3];
+
+for (i from 1 to 9) {
+	temp1 = t0[split(s0, 0, 7)];
+	temp2 = t0[split(s3, 8, 15)] <<< 8;
+	temp3 = t0[split(s2, 16, 23)] <<< 16;
+	temp4 = t0[split(s1, 24, 31)] <<< 24;
+	new_s0 = temp1 ^ temp2 ^ temp3 ^ temp4 ^ k[(i * 4)];
+
+	temp1 = t0[split(s1, 0, 7)];
+	temp2 = t0[split(s0, 8, 15)] <<< 8;
+	temp3 = t0[split(s3, 16, 23)] <<< 16;
+	temp4 = t0[split(s2, 24, 31)] <<< 24;
+	new_s1 = temp1 ^ temp2 ^ temp3 ^ temp4 ^ k[(i * 4) + 1];
+
+	temp1 = t0[split(s2, 0, 7)];
+	temp2 = t0[split(s1, 8, 15)] <<< 8;
+	temp3 = t0[split(s0, 16, 23)] <<< 16;
+	temp4 = t0[split(s3, 24, 31)] <<< 24;
+	new_s2 = temp1 ^ temp2 ^ temp3 ^ temp4 ^ k[(i * 4) + 2];
+
+	temp1 = t0[split(s3, 0, 7)];
+	temp2 = t0[split(s2, 8, 15)] <<< 8;
+	temp3 = t0[split(s1, 16, 23)] <<< 16;
+	temp4 = t0[split(s0, 24, 31)] <<< 24;
+	new_s3 = temp1 ^ temp2 ^ temp3 ^ temp4 ^ k[(i * 4) + 3];
+
+	s0 = new_s0;
+	s1 = new_s1;
+	s2 = new_s2;
+	s3 = new_s3;
+}
+
+new_s0 = merge(st:8[split(s1, 24, 31)], st:8[split(s2, 16, 23)], st:8[split(s3, 8, 15)], st:8[split(s0, 0, 7)]);
+new_s1 = merge(st:8[split(s2, 24, 31)], st:8[split(s3, 16, 23)], st:8[split(s0, 8, 15)], st:8[split(s1, 0, 7)]);
+new_s2 = merge(st:8[split(s3, 24, 31)], st:8[split(s0, 16, 23)], st:8[split(s1, 8, 15)], st:8[split(s2, 0, 7)]);
+new_s3 = merge(st:8[split(s0, 24, 31)], st:8[split(s1, 16, 23)], st:8[split(s2, 8, 15)], st:8[split(s3, 0, 7)]);
+
+s0 = new_s0 ^ k[40];
+s1 = new_s1 ^ k[41];
+s2 = new_s2 ^ k[42];
+s3 = new_s3 ^ k[43];

@@ -1,0 +1,630 @@
+//_x86_64_AES_decrypt:
+	xorl	0(%r15),%eax
+	xorl	4(%r15),%ebx
+	xorl	8(%r15),%ecx
+	xorl	12(%r15),%edx
+
+	movl	240(%r15),%r13d
+	subl	$1,%r13d
+//	jmp	L$dec_loop
+
+
+
+//.p2align	4
+//L$dec_loop:
+// 1st iteration
+
+	movzbl	%al,%esi
+	movzbl	%bl,%edi
+	movzbl	%cl,%ebp
+	movl	0(%r14,%rsi,8),%r10d
+	movl	0(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r12d
+
+	movzbl	%dh,%esi
+	movzbl	%ah,%edi
+	movzbl	%dl,%ebp
+	xorl	3(%r14,%rsi,8),%r10d
+	xorl	3(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r8d
+
+	movzbl	%bh,%esi
+	shrl	$16,%eax
+	movzbl	%ch,%ebp
+	xorl	3(%r14,%rsi,8),%r12d
+	shrl	$16,%edx
+	xorl	3(%r14,%rbp,8),%r8d
+
+	shrl	$16,%ebx
+	leaq	16(%r15),%r15
+	shrl	$16,%ecx
+
+	movzbl	%cl,%esi
+	movzbl	%dl,%edi
+	movzbl	%al,%ebp
+	xorl	2(%r14,%rsi,8),%r10d
+	xorl	2(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r12d
+
+	movzbl	%bh,%esi
+	movzbl	%ch,%edi
+	movzbl	%bl,%ebp
+	xorl	1(%r14,%rsi,8),%r10d
+	xorl	1(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r8d
+
+	movzbl	%dh,%esi
+	movl	12(%r15),%edx
+	movzbl	%ah,%ebp
+	xorl	1(%r14,%rsi,8),%r12d
+	movl	0(%r15),%eax
+	xorl	1(%r14,%rbp,8),%r8d
+
+	xorl	%r10d,%eax
+	movl	4(%r15),%ebx
+	movl	8(%r15),%ecx
+	xorl	%r12d,%ecx
+	xorl	%r11d,%ebx
+	xorl	%r8d,%edx
+        subl	$1,%r13d
+
+//        jnz	L$dec_loop
+
+//L$dec_loop:
+// 2nd iteration
+
+	movzbl	%al,%esi
+	movzbl	%bl,%edi
+	movzbl	%cl,%ebp
+	movl	0(%r14,%rsi,8),%r10d
+	movl	0(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r12d
+
+	movzbl	%dh,%esi
+	movzbl	%ah,%edi
+	movzbl	%dl,%ebp
+	xorl	3(%r14,%rsi,8),%r10d
+	xorl	3(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r8d
+
+	movzbl	%bh,%esi
+	shrl	$16,%eax
+	movzbl	%ch,%ebp
+	xorl	3(%r14,%rsi,8),%r12d
+	shrl	$16,%edx
+	xorl	3(%r14,%rbp,8),%r8d
+
+	shrl	$16,%ebx
+	leaq	16(%r15),%r15
+	shrl	$16,%ecx
+
+	movzbl	%cl,%esi
+	movzbl	%dl,%edi
+	movzbl	%al,%ebp
+	xorl	2(%r14,%rsi,8),%r10d
+	xorl	2(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r12d
+
+	movzbl	%bh,%esi
+	movzbl	%ch,%edi
+	movzbl	%bl,%ebp
+	xorl	1(%r14,%rsi,8),%r10d
+	xorl	1(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r8d
+
+	movzbl	%dh,%esi
+	movl	12(%r15),%edx
+	movzbl	%ah,%ebp
+	xorl	1(%r14,%rsi,8),%r12d
+	movl	0(%r15),%eax
+	xorl	1(%r14,%rbp,8),%r8d
+
+	xorl	%r10d,%eax
+	movl	4(%r15),%ebx
+	movl	8(%r15),%ecx
+	xorl	%r12d,%ecx
+	xorl	%r11d,%ebx
+	xorl	%r8d,%edx
+        subl	$1,%r13d
+
+//        jnz	L$dec_loop
+
+//L$dec_loop:
+// 3rd iteration
+
+	movzbl	%al,%esi
+	movzbl	%bl,%edi
+	movzbl	%cl,%ebp
+	movl	0(%r14,%rsi,8),%r10d
+	movl	0(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r12d
+
+	movzbl	%dh,%esi
+	movzbl	%ah,%edi
+	movzbl	%dl,%ebp
+	xorl	3(%r14,%rsi,8),%r10d
+	xorl	3(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r8d
+
+	movzbl	%bh,%esi
+	shrl	$16,%eax
+	movzbl	%ch,%ebp
+	xorl	3(%r14,%rsi,8),%r12d
+	shrl	$16,%edx
+	xorl	3(%r14,%rbp,8),%r8d
+
+	shrl	$16,%ebx
+	leaq	16(%r15),%r15
+	shrl	$16,%ecx
+
+	movzbl	%cl,%esi
+	movzbl	%dl,%edi
+	movzbl	%al,%ebp
+	xorl	2(%r14,%rsi,8),%r10d
+	xorl	2(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r12d
+
+	movzbl	%bh,%esi
+	movzbl	%ch,%edi
+	movzbl	%bl,%ebp
+	xorl	1(%r14,%rsi,8),%r10d
+	xorl	1(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r8d
+
+	movzbl	%dh,%esi
+	movl	12(%r15),%edx
+	movzbl	%ah,%ebp
+	xorl	1(%r14,%rsi,8),%r12d
+	movl	0(%r15),%eax
+	xorl	1(%r14,%rbp,8),%r8d
+
+	xorl	%r10d,%eax
+	movl	4(%r15),%ebx
+	movl	8(%r15),%ecx
+	xorl	%r12d,%ecx
+	xorl	%r11d,%ebx
+	xorl	%r8d,%edx
+        subl	$1,%r13d
+
+//        jnz	L$dec_loop
+
+//L$dec_loop:
+// 4th iteration
+
+	movzbl	%al,%esi
+	movzbl	%bl,%edi
+	movzbl	%cl,%ebp
+	movl	0(%r14,%rsi,8),%r10d
+	movl	0(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r12d
+
+	movzbl	%dh,%esi
+	movzbl	%ah,%edi
+	movzbl	%dl,%ebp
+	xorl	3(%r14,%rsi,8),%r10d
+	xorl	3(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r8d
+
+	movzbl	%bh,%esi
+	shrl	$16,%eax
+	movzbl	%ch,%ebp
+	xorl	3(%r14,%rsi,8),%r12d
+	shrl	$16,%edx
+	xorl	3(%r14,%rbp,8),%r8d
+
+	shrl	$16,%ebx
+	leaq	16(%r15),%r15
+	shrl	$16,%ecx
+
+	movzbl	%cl,%esi
+	movzbl	%dl,%edi
+	movzbl	%al,%ebp
+	xorl	2(%r14,%rsi,8),%r10d
+	xorl	2(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r12d
+
+	movzbl	%bh,%esi
+	movzbl	%ch,%edi
+	movzbl	%bl,%ebp
+	xorl	1(%r14,%rsi,8),%r10d
+	xorl	1(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r8d
+
+	movzbl	%dh,%esi
+	movl	12(%r15),%edx
+	movzbl	%ah,%ebp
+	xorl	1(%r14,%rsi,8),%r12d
+	movl	0(%r15),%eax
+	xorl	1(%r14,%rbp,8),%r8d
+
+	xorl	%r10d,%eax
+	movl	4(%r15),%ebx
+	movl	8(%r15),%ecx
+	xorl	%r12d,%ecx
+	xorl	%r11d,%ebx
+	xorl	%r8d,%edx
+        subl	$1,%r13d
+
+//        jnz	L$dec_loop
+
+//L$dec_loop:
+// 5th iteration
+
+	movzbl	%al,%esi
+	movzbl	%bl,%edi
+	movzbl	%cl,%ebp
+	movl	0(%r14,%rsi,8),%r10d
+	movl	0(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r12d
+
+	movzbl	%dh,%esi
+	movzbl	%ah,%edi
+	movzbl	%dl,%ebp
+	xorl	3(%r14,%rsi,8),%r10d
+	xorl	3(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r8d
+
+	movzbl	%bh,%esi
+	shrl	$16,%eax
+	movzbl	%ch,%ebp
+	xorl	3(%r14,%rsi,8),%r12d
+	shrl	$16,%edx
+	xorl	3(%r14,%rbp,8),%r8d
+
+	shrl	$16,%ebx
+	leaq	16(%r15),%r15
+	shrl	$16,%ecx
+
+	movzbl	%cl,%esi
+	movzbl	%dl,%edi
+	movzbl	%al,%ebp
+	xorl	2(%r14,%rsi,8),%r10d
+	xorl	2(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r12d
+
+	movzbl	%bh,%esi
+	movzbl	%ch,%edi
+	movzbl	%bl,%ebp
+	xorl	1(%r14,%rsi,8),%r10d
+	xorl	1(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r8d
+
+	movzbl	%dh,%esi
+	movl	12(%r15),%edx
+	movzbl	%ah,%ebp
+	xorl	1(%r14,%rsi,8),%r12d
+	movl	0(%r15),%eax
+	xorl	1(%r14,%rbp,8),%r8d
+
+	xorl	%r10d,%eax
+	movl	4(%r15),%ebx
+	movl	8(%r15),%ecx
+	xorl	%r12d,%ecx
+	xorl	%r11d,%ebx
+	xorl	%r8d,%edx
+        subl	$1,%r13d
+
+//        jnz	L$dec_loop
+
+//L$dec_loop:
+// 6th iteration
+
+	movzbl	%al,%esi
+	movzbl	%bl,%edi
+	movzbl	%cl,%ebp
+	movl	0(%r14,%rsi,8),%r10d
+	movl	0(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r12d
+
+	movzbl	%dh,%esi
+	movzbl	%ah,%edi
+	movzbl	%dl,%ebp
+	xorl	3(%r14,%rsi,8),%r10d
+	xorl	3(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r8d
+
+	movzbl	%bh,%esi
+	shrl	$16,%eax
+	movzbl	%ch,%ebp
+	xorl	3(%r14,%rsi,8),%r12d
+	shrl	$16,%edx
+	xorl	3(%r14,%rbp,8),%r8d
+
+	shrl	$16,%ebx
+	leaq	16(%r15),%r15
+	shrl	$16,%ecx
+
+	movzbl	%cl,%esi
+	movzbl	%dl,%edi
+	movzbl	%al,%ebp
+	xorl	2(%r14,%rsi,8),%r10d
+	xorl	2(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r12d
+
+	movzbl	%bh,%esi
+	movzbl	%ch,%edi
+	movzbl	%bl,%ebp
+	xorl	1(%r14,%rsi,8),%r10d
+	xorl	1(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r8d
+
+	movzbl	%dh,%esi
+	movl	12(%r15),%edx
+	movzbl	%ah,%ebp
+	xorl	1(%r14,%rsi,8),%r12d
+	movl	0(%r15),%eax
+	xorl	1(%r14,%rbp,8),%r8d
+
+	xorl	%r10d,%eax
+	movl	4(%r15),%ebx
+	movl	8(%r15),%ecx
+	xorl	%r12d,%ecx
+	xorl	%r11d,%ebx
+	xorl	%r8d,%edx
+        subl	$1,%r13d
+
+//        jnz	L$dec_loop
+
+//L$dec_loop:
+// 7th iteration
+
+	movzbl	%al,%esi
+	movzbl	%bl,%edi
+	movzbl	%cl,%ebp
+	movl	0(%r14,%rsi,8),%r10d
+	movl	0(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r12d
+
+	movzbl	%dh,%esi
+	movzbl	%ah,%edi
+	movzbl	%dl,%ebp
+	xorl	3(%r14,%rsi,8),%r10d
+	xorl	3(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r8d
+
+	movzbl	%bh,%esi
+	shrl	$16,%eax
+	movzbl	%ch,%ebp
+	xorl	3(%r14,%rsi,8),%r12d
+	shrl	$16,%edx
+	xorl	3(%r14,%rbp,8),%r8d
+
+	shrl	$16,%ebx
+	leaq	16(%r15),%r15
+	shrl	$16,%ecx
+
+	movzbl	%cl,%esi
+	movzbl	%dl,%edi
+	movzbl	%al,%ebp
+	xorl	2(%r14,%rsi,8),%r10d
+	xorl	2(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r12d
+
+	movzbl	%bh,%esi
+	movzbl	%ch,%edi
+	movzbl	%bl,%ebp
+	xorl	1(%r14,%rsi,8),%r10d
+	xorl	1(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r8d
+
+	movzbl	%dh,%esi
+	movl	12(%r15),%edx
+	movzbl	%ah,%ebp
+	xorl	1(%r14,%rsi,8),%r12d
+	movl	0(%r15),%eax
+	xorl	1(%r14,%rbp,8),%r8d
+
+	xorl	%r10d,%eax
+	movl	4(%r15),%ebx
+	movl	8(%r15),%ecx
+	xorl	%r12d,%ecx
+	xorl	%r11d,%ebx
+	xorl	%r8d,%edx
+        subl	$1,%r13d
+
+//        jnz	L$dec_loop
+
+//L$dec_loop:
+// 8th iteration
+
+	movzbl	%al,%esi
+	movzbl	%bl,%edi
+	movzbl	%cl,%ebp
+	movl	0(%r14,%rsi,8),%r10d
+	movl	0(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r12d
+
+	movzbl	%dh,%esi
+	movzbl	%ah,%edi
+	movzbl	%dl,%ebp
+	xorl	3(%r14,%rsi,8),%r10d
+	xorl	3(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r8d
+
+	movzbl	%bh,%esi
+	shrl	$16,%eax
+	movzbl	%ch,%ebp
+	xorl	3(%r14,%rsi,8),%r12d
+	shrl	$16,%edx
+	xorl	3(%r14,%rbp,8),%r8d
+
+	shrl	$16,%ebx
+	leaq	16(%r15),%r15
+	shrl	$16,%ecx
+
+	movzbl	%cl,%esi
+	movzbl	%dl,%edi
+	movzbl	%al,%ebp
+	xorl	2(%r14,%rsi,8),%r10d
+	xorl	2(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r12d
+
+	movzbl	%bh,%esi
+	movzbl	%ch,%edi
+	movzbl	%bl,%ebp
+	xorl	1(%r14,%rsi,8),%r10d
+	xorl	1(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r8d
+
+	movzbl	%dh,%esi
+	movl	12(%r15),%edx
+	movzbl	%ah,%ebp
+	xorl	1(%r14,%rsi,8),%r12d
+	movl	0(%r15),%eax
+	xorl	1(%r14,%rbp,8),%r8d
+
+	xorl	%r10d,%eax
+	movl	4(%r15),%ebx
+	movl	8(%r15),%ecx
+	xorl	%r12d,%ecx
+	xorl	%r11d,%ebx
+	xorl	%r8d,%edx
+        subl	$1,%r13d
+
+//        jnz	L$dec_loop
+
+//L$dec_loop:
+// 9th iteration
+
+	movzbl	%al,%esi
+	movzbl	%bl,%edi
+	movzbl	%cl,%ebp
+	movl	0(%r14,%rsi,8),%r10d
+	movl	0(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r12d
+
+	movzbl	%dh,%esi
+	movzbl	%ah,%edi
+	movzbl	%dl,%ebp
+	xorl	3(%r14,%rsi,8),%r10d
+	xorl	3(%r14,%rdi,8),%r11d
+	movl	0(%r14,%rbp,8),%r8d
+
+	movzbl	%bh,%esi
+	shrl	$16,%eax
+	movzbl	%ch,%ebp
+	xorl	3(%r14,%rsi,8),%r12d
+	shrl	$16,%edx
+	xorl	3(%r14,%rbp,8),%r8d
+
+	shrl	$16,%ebx
+	leaq	16(%r15),%r15
+	shrl	$16,%ecx
+
+	movzbl	%cl,%esi
+	movzbl	%dl,%edi
+	movzbl	%al,%ebp
+	xorl	2(%r14,%rsi,8),%r10d
+	xorl	2(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r12d
+
+	movzbl	%bh,%esi
+	movzbl	%ch,%edi
+	movzbl	%bl,%ebp
+	xorl	1(%r14,%rsi,8),%r10d
+	xorl	1(%r14,%rdi,8),%r11d
+	xorl	2(%r14,%rbp,8),%r8d
+
+	movzbl	%dh,%esi
+	movl	12(%r15),%edx
+	movzbl	%ah,%ebp
+	xorl	1(%r14,%rsi,8),%r12d
+	movl	0(%r15),%eax
+	xorl	1(%r14,%rbp,8),%r8d
+
+	xorl	%r10d,%eax
+	movl	4(%r15),%ebx
+	movl	8(%r15),%ecx
+	xorl	%r12d,%ecx
+	xorl	%r11d,%ebx
+	xorl	%r8d,%edx
+        subl	$1,%r13d
+
+//        jnz	L$dec_loop
+// last iteration
+
+	leaq	2048(%r14),%r14
+	movzbl	%al,%esi
+	movzbl	%bl,%edi
+	movzbl	%cl,%ebp
+	movzbl	(%r14,%rsi,1),%r10d		// r10d = 0, 0, 0, s(s0, 0, 7)
+	movzbl	(%r14,%rdi,1),%r11d		// r11d = 0, 0, 0, s(s1, 0, 7)
+	movzbl	(%r14,%rbp,1),%r12d		// r12d = 0, 0, 0, s(s2, 0, 7)
+
+	movzbl	%dl,%esi
+	movzbl	%dh,%edi
+	movzbl	%ah,%ebp
+	movzbl	(%r14,%rsi,1),%r8d		// r8d = 0, 0, 0, s(s3, 0, 7)
+	movzbl	(%r14,%rdi,1),%edi		// edi = 0, 0, 0, s(s3, 8, 15)
+	movzbl	(%r14,%rbp,1),%ebp		// ebp = 0, 0, 0, s(s0, 8, 15)
+
+	shll	$8,%edi			        // edi = 0, 0, s(s3, 8, 15), 0
+	shll	$8,%ebp				// ebp = 0, 0, s(s0, 8, 15), 0
+
+	xorl	%edi,%r10d			// r10d = 0, 0, s(s3, 8, 15), s(s0, 0, 7)
+	xorl	%ebp,%r11d			// r11d = 0, 0, s(s0, 8, 15), s(s1, 0, 7)
+	shrl	$16,%edx			// edx = 0, 0, (s3, 24, 31), (s3, 16, 23)
+
+	movzbl	%bh,%esi			
+	movzbl	%ch,%edi
+	shrl	$16,%eax			// eax = 0, 0, (s0, 24, 31), (s0, 16, 23)
+	movzbl	(%r14,%rsi,1),%esi		// esi = 0, 0, 0, s(s1, 8, 15)
+	movzbl	(%r14,%rdi,1),%edi		// edi = 0, 0, 0, s(s2, 8, 15)
+
+	shll	$8,%esi				
+	shll	$8,%edi
+	shrl	$16,%ebx			// ebx = 0, 0, (s1, 24, 31), (s2, 16, 23)
+	xorl	%esi,%r12d			// r12d = 0, 0, s(s1, 8, 15), s(s2, 0, 7)
+	xorl	%edi,%r8d			// r8d = 0, 0, s(s2, 8, 15), s(s3, 0, 7)
+	shrl	$16,%ecx			// ecx = 0, 0, (s2, 24, 31), (s2, 16, 23)
+
+	movzbl	%cl,%esi			
+	movzbl	%dl,%edi
+	movzbl	%al,%ebp
+	movzbl	(%r14,%rsi,1),%esi		// esi = 0, 0, 0, s(s2, 16, 23)
+	movzbl	(%r14,%rdi,1),%edi		// edi = 0, 0, 0, s(s3, 16, 23)
+	movzbl	(%r14,%rbp,1),%ebp		// ebp = 0, 0, 0, s(s0, 16, 23)
+
+	shll	$16,%esi
+	shll	$16,%edi
+	shll	$16,%ebp
+
+	xorl	%esi,%r10d			// r10d = 0, s(s2, 16, 23), s(s3, 8, 15), s(s0, 0, 7)
+	xorl	%edi,%r11d			// r11d = 0, s(s3, 16, 23), s(s0, 8, 15), s(s1, 0, 7)
+	xorl	%ebp,%r12d			// r12d = 0, s(s0, 16, 23), s(s1, 8, 15), s(s2, 0, 7)
+
+	movzbl	%bl,%esi
+	movzbl	%bh,%edi
+	movzbl	%ch,%ebp
+	movzbl	(%r14,%rsi,1),%esi		// esi = 0, 0, 0, s(s1, 16, 23)
+	movzbl	(%r14,%rdi,1),%edi		// edi = 0, 0, 0, s(s1, 24, 31)
+	movzbl	(%r14,%rbp,1),%ebp		// ebp = 0, 0, 0, s(s2, 24, 31)
+
+	shll	$16,%esi
+	shll	$24,%edi
+	shll	$24,%ebp
+
+	xorl	%esi,%r8d			// r8d = 0, s(s1, 16, 23), s(s2, 8, 15), s(s3, 0, 7)
+	xorl	%edi,%r10d			// r10d = s(s1, 24, 31), s(s2, 16, 23), s(s3, 8, 15), s(s0, 0, 7)
+	xorl	%ebp,%r11d			// r11d = s(s2, 24, 31), s(s3, 16, 23), s(s0, 8, 15), s(s1, 0, 7)
+
+	movzbl	%dh,%esi
+	movzbl	%ah,%edi
+	movl	28(%r15),%edx
+	movzbl	(%r14,%rsi,1),%esi		// esi = 0, 0, 0, s(s3, 24, 31)
+	movzbl	(%r14,%rdi,1),%edi		// edi = 0, 0, 0, s(s0, 24, 31)
+	movl	16(%r15),%eax
+
+	shll	$24,%esi
+	shll	$24,%edi
+
+	xorl	%esi,%r12d			// r12d = s(s3, 24, 31), s(s0, 16, 23), s(s1, 8, 15), s(s2, 0, 7)
+	xorl	%edi,%r8d			// r8d = s(s0, 24, 31), s(s1, 16, 23), s(s2, 8, 15), s(s3, 0, 7)
+
+	movl	20(%r15),%ebx
+	movl	24(%r15),%ecx
+	leaq	-2048(%r14),%r14
+	xorl	%r10d,%eax
+	xorl	%r11d,%ebx
+	xorl	%r12d,%ecx
+	xorl	%r8d,%edx

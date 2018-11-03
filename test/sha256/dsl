@@ -1,0 +1,77 @@
+a = H0;
+b = H1;
+c = H2;
+d = H3;
+e = H4;
+f = H5;
+g = H6;
+h = H7;
+
+function DELTA0(x) {
+return (x >>> 7) ^ (x >>> 18) ^ (x >> 3);
+}
+function DELTA1(x) {
+return (x >>> 17) ^ (x >>> 19) ^ (x >> 10);
+}
+function SIGMA0(a) {
+return (a >>> 2) ^ (a >>> 13) ^ (a >>> 22);
+}
+function SIGMA1(a) {
+return (a >>> 6) ^ (a >>> 11) ^ (a >>> 25);
+}
+function CH(x, y, z) {
+return (x & y) ^ (!x & z);
+}
+function MAJ(x, y, z) {
+return (x & y) ^ (x & z) ^ (y & z);
+}
+
+for (i from 0 to 15) {
+    message = m[i];
+    message = merge(split(message, 0, 7), merge(split(message, 8, 15), merge(split(message, 16, 23), split(message, 24, 31))));
+    w[i] = message;
+	sigma1 = SIGMA1(e);
+	ch = CH(e,f,g);
+	sigma0 = SIGMA0(a);
+	maj = MAJ(a,b,c);
+	t1 = h + sigma1 + ch + k[i] + w[i];
+	h = g;
+	g = f;
+	f = e;
+	e = d + t1;
+	d = c;
+	c = b;
+	b = a;
+	a = t1 + sigma0 + maj;
+}
+for (i from 16 to 63) {
+	w_15 = w[i - 15];
+	w_2 = w[i - 2];
+	w_16 = w[i - 16];
+	w_7 = w[i - 7];
+	delta0 = DELTA0(w_15);
+	delta1 = DELTA1(w_2);
+	w[i] = w_16 + delta0 + w_7 + delta1;
+	sigma1 = SIGMA1(e);
+	ch = CH(e,f,g);
+	sigma0 = SIGMA0(a);
+	maj = MAJ(a,b,c);
+	t1 = h + sigma1 + ch + k[i] + w[i];
+	h = g;
+	g = f;
+	f = e;
+	e = d + t1;
+	d = c;
+	c = b;
+	b = a;
+	a = t1 + sigma0 + maj;
+}
+
+H0 = H0 + a;
+H1 = H1 + b;
+H2 = H2 + c;
+H3 = H3 + d;
+H4 = H4 + e;
+H5 = H5 + f;
+H6 = H6 + g;
+H7 = H7 + h;
