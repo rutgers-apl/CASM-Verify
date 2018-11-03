@@ -528,9 +528,11 @@ def ReduceThisArrayRead(vertex, graph, addtlExprs) :
             elif check == "unknown" :
                 config.currentUnknownCount = config.currentUnknownCount + 1
                 if config.currentUnknownCount >= config.maxUnknownCount :
+                    config.analysisEndTime = time.time()
                     ansiCode.Print("\n")
                     ansiCode.PrintOnThisLineBold("%sp1 is not equivalent to p2 (Reason: SMT Timeout)\n" % (ansiCode.red))
                     config.PrintStatistics()
+                    config.PrintGout("p1 is not equivalent to p2 (Reason: SMT Timeout)")
                     sys.exit("")
 
         # Check if it maybe aliases
@@ -563,7 +565,7 @@ def ReduceThisArrayRead(vertex, graph, addtlExprs) :
             currentHole.operands = [tempCmpNode, arrayWriteValue, newHole]
             for op in currentHole.operands :
                 if op.users == None : op.users = []
-                op.userse.append(currentHole)
+                op.users.append(currentHole)
             currentHole.operator = VertexNode.OpCode.CONDITIONAL
             currentHole.value = None
             currentHole.type = VertexNode.VertexType.TEMP
@@ -576,9 +578,11 @@ def ReduceThisArrayRead(vertex, graph, addtlExprs) :
         elif check == "unknown" :
             config.currentUnknownCount = config.currentUnknownCount + 1
             if config.currentUnknownCount >= config.maxUnknownCount :
+                config.analysisEndTime = time.time()
                 ansiCode.Print("\n")
                 ansiCode.PrintOnThisLineBold("%sp1 is not equivalent to p2 (Reason: SMT Timeout)\n" % (ansiCode.red))
                 config.PrintStatistics()
+                config.PrintGout("p1 is not equivalent to p2 (Reason: SMT Timeout)")
                 sys.exit("")
 
         
@@ -807,9 +811,11 @@ def ClassifyVertexToConfEquivSet(v2, graph, confEquivSet, addtlExprs, compNumber
         elif check == "unknown" :
             config.currentUnknownCount = config.currentUnknownCount + 1
             if config.currentUnknownCount >= config.maxUnknownCount :
+                config.analysisEndTime = time.time()
                 ansiCode.Print("\n")
                 ansiCode.PrintOnThisLineBold("%sp1 is not equivalent to p2 (Reason: SMT Timeout)\n" % (ansiCode.red))
                 config.PrintStatistics()
+                config.PrintGout("p1 is not equivalent to p2 (Reason: SMT Timeout)")
                 sys.exit("")
 
         # else do nothing!

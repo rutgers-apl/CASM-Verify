@@ -17,6 +17,7 @@ import itertools
 sys.setrecursionlimit(10000)
 
 # Command line arguments parsing
+config.analysisStartTime = time.time()
 parser = argparse.ArgumentParser()
 parser.add_argument('--pre', help='file path that stores the pre condition mapping between asm and dsl')
 parser.add_argument("--post", help='file path that stores the post condition mapping between asm and dsl')
@@ -35,6 +36,7 @@ parser.add_argument("--no_alias_analysis", help="Do not perform alias analysis",
 parser.add_argument("--timeout", help="How long should query run before calling it time-out (in seconds?)")
 parser.add_argument("--z3_check_command", help="A specific check-sat-using command for smt query. defaults to (check-sat-using default)")
 parser.add_argument("--max_unknown_count", type=int, help="Number of Unknown results to encounter before exiting verification. Defaults to 1")
+parser.add_argument("--gout", help="For generating Report.")
 args = parser.parse_args()
 
 
@@ -253,10 +255,12 @@ for outEqVertex in postGraph.vertices :
         isWorthContinuing = False
 
 if not isWorthContinuing :
+    config.analysisEndTime = time.time()
     ansiCode.PrintOnThisLine("Performing post concrete execution analysis")
     ansiCode.Print("\n")
     ansiCode.PrintOnThisLineBold("%sp1 is not equivalent to p2 (Reason: Concrete Execution)\n" % (ansiCode.red))
     config.PrintStatistics()
+    config.PrintGout("p1 is not equivalent to p2 (Reason: Concrete Execution)")
     
 else :
     ansiCode.PrintOnThisLine("Concrete execution finished\n")
@@ -306,9 +310,12 @@ else :
         assert(outEqVertex.operator == depgraph.VertexNode.OpCode.EQ)
         if outEqVertex.operands[0] != outEqVertex.operands[1] : isImplEqToSpec = False
 
+    config.analysisEndTime = time.time()
     if isImplEqToSpec :
         ansiCode.PrintOnThisLineBold("%sp1 is equivalent to p2\n" % (ansiCode.green))
         config.PrintStatistics()
+        config.PrintGout("p1 is equivalent to p2")
     else :
         ansiCode.PrintOnThisLineBold("%sp1 is not equivalent to p2(Reason: Output semantically different)\n" % (ansiCode.red))
         config.PrintStatistics()
+        config.PrintGout("p1 is not equivalent to p2(Reason: Output semantically different)")

@@ -9,6 +9,7 @@ p2File = None # File for p2
 z3CheckSatCommand = "(check-sat-using default)"
 currentUnknownCount = 0
 maxUnknownCount = 1
+gout = None
 
 # For statistics
 totalNodesToCompare = 0
@@ -20,17 +21,30 @@ totalIndexAliasNum = 0
 totalSmtTime = 0
 totalAliasAnalysisTime = 0
 totalVerificationTime = 0
+analysisStartTime = 0
+analysisEndTime = 0
 
 def PrintStatistics() :
+    print("Total Time : %f" % (analysisEndTime - analysisStartTime))
     print("Amount of Time Spent Verifying : %f" % (totalVerificationTime))
-    print("Amount of Time Spent Alias Analysis : %f" % (totalAliasAnalysisTime))
-    print("Amount of Time Spent doing SMT Query : %f" % (totalSmtTime))
+    #print("Amount of Time Spent Alias Analysis : %f" % (totalAliasAnalysisTime))
+    #print("Amount of Time Spent doing SMT Query : %f" % (totalSmtTime))
     print("Total Number of Node Pairs to Compare : %d" % (totalNodesToCompare))
     print("Number of Equivalent Pairs of Nodes : %d" % (equivNodeNum))
-    print("Number of Not Equivalent Pair of Nodes : %d" % (noEquivNodeNum))
+    #print("Number of Not Equivalent Pair of Nodes : %d" % (noEquivNodeNum))
     print("Number of Array Read Nodes Reduced : %d" % (readNodeNum))
-    print("Number of Array Index Comparisons: %d" % (totalIndexAliasNum))
+    #print("Number of Array Index Comparisons: %d" % (totalIndexAliasNum))
 
+def PrintGout(message) :
+    if gout != None :
+        file = open(gout, 'w')
+        # First line is the message = result of analysis
+        file.write(message)
+        file.write("\n")
+        # Second line is how long it took total
+        file.write("%f" % (analysisEndTime - analysisStartTime))
+        file.close()
+        
 
 # architecture of p1 and p2
 arch = 0
@@ -154,3 +168,7 @@ def SetUpConfig(c, arg) :
 
     if arg.max_unknown_count != None :
         c.maxUnknownCount = arg.max_unknown_count
+
+    # Set gout
+    if arg.gout != None :
+        c.gout = arg.gout
