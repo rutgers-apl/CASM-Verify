@@ -9,6 +9,6 @@ RUN python3 -m pip install z3-solver
 
 WORKDIR /home
 
-ADD CASM_Verify.tar /home
+RUN git https://github.com/jpl169/CASM_Verify_Artifact.git CASM_Verify
 
 WORKDIR /home/CASM_Verify
