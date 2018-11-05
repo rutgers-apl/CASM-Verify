@@ -42,7 +42,9 @@ def PrintGout(message) :
         file.write(message)
         file.write("\n")
         # Second line is how long it took total
-        file.write("%f" % (analysisEndTime - analysisStartTime))
+        file.write("Total Time :%f\n" % (analysisEndTime - analysisStartTime))
+        # Third line is Amount of Time Spent Verifying
+        file.write("Amount of Time Spent Verifying :%f\n" % (totalVerificationTime))
         file.close()
         
 

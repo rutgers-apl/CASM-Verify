@@ -37,12 +37,16 @@ def LoadPosition(n) :
 def Print(s) :
     sys.stdout.write(s)
     sys.stdout.flush()
+    return
 
 def PrintOnThisLineBold(s) :
     Print("%s%s%s%s%s" % (Left(1000), ClearLine(0), bold, s, reset))
+    return
 
 def PrintOnThisLine(s) :
     Print("%s%s%s" % (Left(1000), ClearLine(0), s))
+    return
 
 def PrintFromLeft(s, l) :
     Print("%s%s%s" % (Left(l), ClearLine(0), s))
+    return
