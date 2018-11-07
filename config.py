@@ -1,7 +1,7 @@
 # General
 verbose = False # message verbosity
 memModel = 32 # memory model uses 32-bit value model.
-smtTimeout = 1000 * 60 * 5 # 1 minute
+smtTimeout = 1000 * 60 * 5 # 5 minute
 aliasAnalysis = True # Performs alias analysis to reduce memory read nodes.
 tempQueryFile = "temp.z3" # This is where we will save query for bash z3.
 p1File = None # File for p1

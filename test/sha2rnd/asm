@@ -1,0 +1,83 @@
+	movl	%ebx,%edi
+	xorl	%ecx,%edi
+	movl	0(%rsi),%r12d
+	movl	%r8d,%r13d
+	movl	%eax,%r14d
+	rorl	$14,%r13d
+	movl	%r9d,%r15d
+
+	xorl	%r8d,%r13d
+	rorl	$9,%r14d
+	xorl	%r10d,%r15d
+
+	movl	%r12d,0(%rsp)
+	xorl	%eax,%r14d
+	andl	%r8d,%r15d
+
+	rorl	$5,%r13d
+	addl	%r11d,%r12d
+	xorl	%r10d,%r15d
+
+	rorl	$11,%r14d
+	xorl	%r8d,%r13d
+	addl	%r15d,%r12d
+
+	movl	%eax,%r15d
+	addl	(%rbp),%r12d
+	xorl	%eax,%r14d
+
+	xorl	%ebx,%r15d
+	rorl	$6,%r13d
+	movl	%ebx,%r11d
+
+	andl	%r15d,%edi
+	rorl	$2,%r14d
+	addl	%r13d,%r12d
+
+	xorl	%edi,%r11d
+	addl	%r12d,%edx
+	addl	%r12d,%r11d
+
+	leaq	4(%rbp),%rbp
+
+	addl	%r14d,%r11d
+	movl	4(%rsi),%r12d
+	movl	%edx,%r13d
+	movl	%r11d,%r14d
+	rorl	$14,%r13d
+	movl	%r8d,%edi
+
+	xorl	%edx,%r13d
+	rorl	$9,%r14d
+	xorl	%r9d,%edi
+
+	movl	%r12d,4(%rsp)
+	xorl	%r11d,%r14d
+	andl	%edx,%edi
+
+	rorl	$5,%r13d
+	addl	%r10d,%r12d
+	xorl	%r9d,%edi
+
+	rorl	$11,%r14d
+	xorl	%edx,%r13d
+	addl	%edi,%r12d
+
+	movl	%r11d,%edi
+	addl	(%rbp),%r12d
+	xorl	%r11d,%r14d
+
+	xorl	%eax,%edi
+	rorl	$6,%r13d
+	movl	%eax,%r10d
+
+	andl	%edi,%r15d
+	rorl	$2,%r14d
+	addl	%r13d,%r12d
+
+	xorl	%r15d,%r10d
+	addl	%r12d,%ecx
+	addl	%r12d,%r10d
+
+	addl	%r14d,%r10d
+

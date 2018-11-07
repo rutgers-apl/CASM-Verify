@@ -1,0 +1,8 @@
+P1.a == P2.r10d;
+P1.b == P2.r11d;
+P1.c == P2.eax;
+P1.d == P2.ebx;
+P1.e == P2.ecx;
+P1.f == P2.edx;
+P1.g == P2.r8d;
+P1.h == P2.r9d;

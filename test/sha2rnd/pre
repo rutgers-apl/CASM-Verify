@@ -1,0 +1,21 @@
+@Data{P2.rbp:64, P2.rbp:64 ~ P2.rbp:64 + 7:64};
+@Data{P2.rsi:64, P2.rsi:64 ~ P2.rsi:64 + 7:64};
+@Data{P2.rsp:64, P2.rsp:64 ~ P2.rsp:64 + 7:64};
+
+P1.a == P2.eax; 
+P1.b == P2.ebx;
+P1.c == P2.ecx;
+P1.d == P2.edx;
+P1.e == P2.r8d;
+P1.f == P2.r9d;
+P1.g == P2.r10d;
+P1.h == P2.r11d;
+
+P1.k[0] == 0xe49b69c1;
+P1.k[1] == 0xefbe4786;
+
+P2.mem[P2.rbp:64] == 0xe49b69c1;
+P2.mem[P2.rbp:64 + 4:64] == 0xefbe4786;
+
+P1.m[0] == P2.mem[P2.rsi:64];
+P1.m[1] == P2.mem[P2.rsi:64 + 4:64];

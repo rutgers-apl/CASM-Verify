@@ -1,0 +1,32 @@
+
+
+function SIGMA0(a) {
+return (a >>> 2) ^ (a >>> 13) ^ (a >>> 22);
+}
+function SIGMA1(a) {
+return (a >>> 6) ^ (a >>> 11) ^ (a >>> 25);
+}
+function CH(x, y, z) {
+return (x & y) ^ (!x & z);
+}
+function MAJ(x, y, z) {
+return (x & y) ^ (x & z) ^ (y & z);
+}
+
+for (i from 0 to 1) {
+	w[i] = m[i];
+	sigma1 = SIGMA1(e);
+	ch = CH(e,f,g);
+	sigma0 = SIGMA0(a);
+	maj = MAJ(a,b,c);
+	t1 = h + sigma1 + ch + k[i] + w[i];
+	t2 = sigma0 + maj;
+	h = g;
+	g = f;
+	f = e;
+	e = d + t1;
+	d = c;
+	c = b;
+	b = a;
+	a = t1 + t2;
+}

@@ -550,6 +550,7 @@ def ReduceThisArrayRead(vertex, graph, addtlExprs) :
             tempCmpNode.index = graph.tempNameCounter
             graph.tempNameCounter = graph.GetNextNameIndex()
             tempCmpNode.bitlength = -1 # Compare is a boolean. bitlength does not exist.
+            tempCmpNode.type = depgraph.VertexNode.VertexType.TEMP
             tempCmpNode.AddMetadata("NotInGraph", True)
 
 
@@ -560,15 +561,16 @@ def ReduceThisArrayRead(vertex, graph, addtlExprs) :
             newHole.index = graph.GetNextNameIndex()
             newHole.type = depgraph.VertexNode.VertexType.NONE
             newHole.AddMetadata("NotInGraph", True)
+            newHole.topRank = currentHole.topRank - 1
 
             # Fill currentHole with Conditional Assignment node.
             currentHole.operands = [tempCmpNode, arrayWriteValue, newHole]
             for op in currentHole.operands :
                 if op.users == None : op.users = []
                 op.users.append(currentHole)
-            currentHole.operator = VertexNode.OpCode.CONDITIONAL
+            currentHole.operator = depgraph.VertexNode.OpCode.CONDITIONAL
             currentHole.value = None
-            currentHole.type = VertexNode.VertexType.TEMP
+            currentHole.type = depgraph.VertexNode.VertexType.TEMP
             currentHole.bitlength = arrayWriteValue.bitlength
             currentHole.AddMetadata("NotInGraph", True)
 
