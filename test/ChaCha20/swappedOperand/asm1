@@ -24,11 +24,11 @@
 	movl	24(%rsp),%r10d
 	movl	28(%rsp),%r11d
 	movd	%xmm3,%r12d
-	movl	52(%rsp),%r13d
+	movl	%r13d,52(%rsp)		// movl	52(%rsp),%r13d
 	movl	56(%rsp),%r14d
 	movl	60(%rsp),%r15d
 
-	movq	64(%rsp),%rbp		// movq	%rbp,64(%rsp)
+	movq	64(%rsp),%rbp		
 	movl	$10,%ebp
 	movq	%rsi,72(%rsp)
 	movq    %xmm2,%rsi		//.byte	102,72,15,126,214
