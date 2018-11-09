@@ -59,7 +59,7 @@ This experiment contains benchmarks with buggy implementations, where random inp
 ```
 
 ### 6. Equivalent Implementations
-This experiment contains benchmarks that are mutated from OpenSSL implementations, but is still semantically correct.
+This experiment contains benchmarks that are mutated from OpenSSL implementations, but is still semantically correct. Estimated time required : ~4 hours 20 minutes
 ```bash
 ./Test6_additionalEquivalenceTest.sh
 ```
