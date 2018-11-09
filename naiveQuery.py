@@ -190,7 +190,7 @@ if check == z3.unsat :
     print("p1 is equivalent to p2\n")
     print("Total Time : %f" % (config.analysisEndTime - config.analysisStartTime))
 elif check == z3.sat :
-    print("p1 is not equivalent to p2\n")
+    print("p1 is not equivalent to p2 (Reason: Output semantically different)\n")
     print("Total Time : %f" % (config.analysisEndTime - config.analysisStartTime))
 else :
     print("p1 is not equivalent to p2 (Reason: SMT Timeout)")

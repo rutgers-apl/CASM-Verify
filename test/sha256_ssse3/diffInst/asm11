@@ -125,7 +125,6 @@ addl    %r10d,%ecx
 
 psrlq    $17,%xmm6			// CHANGE
 addl    %r10d,%r14d			// addl    %r15d,%r10d
-sbbl	$0,%r10d			//
 adcl    %r15d,%r14d			// movl    %ecx,%r13d
 movl    %ecx,%r13d			// addl    %r10d,%r14d
 					//
