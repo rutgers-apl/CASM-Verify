@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
 RUN apt-get install -yq --no-install-recommends apt-utils 
-RUN apt-get install -yq git python3 python3-pip jgraph python texlive-font-utils
+RUN apt-get install -yq git python3 python3-pip
 RUN python3 -m pip install z3-solver
 
 WORKDIR /home
