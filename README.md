@@ -20,7 +20,15 @@ docker run -it casmverify
 ## Testing benchmarks
 We provide bash scripts that automatically runs the command to test CASM_Verify's benchmarks. Since running all CASM_Verify's benchmarks will take well over 24 hours, we divided the entire test cases into small sections.
 
-Before executing each benchmark, the scripts will print which test case it's running and the expected output: Whether (1) p1 is equivalent to p2, (2) p1 is not equivalent to p2. **If CASM_Verify experiences SMT Solver timeout, it will report that p1 is not equivalent to p2, but also output that it experiences SMT Solver timeout.**
+Before executing each benchmark, the scripts will print which test
+case it's running and the expected output: Whether (1) p1 is
+equivalent to p2, (2) p1 is not equivalent to p2. **If CASM_Verify
+experiences SMT Solver timeout, it will report that p1 is not
+equivalent to p2, but also output that it experiences SMT Solver
+timeout.**
+
+If you would like to skip any of the benchmarks in the script, you can
+press ctrl + c to stop the current benchmark and run the next benchmark.
 
 ### 0. Micro (Fast) Benchmarks.
 This script contains four benchmarks for quickly testing whether CASM_Verify can correctly verify that an implementation is correct. Estimated time required : ~36 minutes
@@ -53,7 +61,9 @@ This experiment contains benchmarks with buggy implementations with mistakes tha
 ```
 
 ### 5. Hard to detect Bug
-This experiment contains benchmarks with buggy implementations, where random input testing may not be able to detect the bug.
+This experiment contains benchmarks with buggy implementations, where
+random input testing may not be able to detect the bug. Estimated time
+required : ~18 hours 15 minutes
 ```bash
 ./Test5_hardToFindBug.sh
 ```
