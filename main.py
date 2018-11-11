@@ -19,22 +19,22 @@ sys.setrecursionlimit(10000)
 # Command line arguments parsing
 config.analysisStartTime = time.time()
 parser = argparse.ArgumentParser()
-parser.add_argument('--pre', help='file path that stores the pre condition mapping between asm and dsl')
-parser.add_argument("--post", help='file path that stores the post condition mapping between asm and dsl')
+parser.add_argument('--pre', help='file path that stores the pre condition mapping between p1 and p2')
+parser.add_argument("--post", help='file path that stores the post condition mapping between p1 and p2')
 parser.add_argument('--p1', help='file path for p1')
 parser.add_argument('--p2', help='file path for p2')
 parser.add_argument('--p1lang', help='is p1 dsl or asm?')
 parser.add_argument('--p2lang', help='is p2 dsl or asm?')
 parser.add_argument("--verbose", help="increase output verbosity", action="store_true")
-parser.add_argument("--arch", help='Architecture of the implementation. Defaults to x86_64. Options: x86_64, x86')
+parser.add_argument("--arch", help='(Under construction)')
 parser.add_argument("--mem_model", type=int, help="Memory model can be based on 8-bit value, or a 32-bit value (assuming there will be 4-byte aligned memory operations. Options: 8, 32) Defaults to 32")
 parser.add_argument("--verif_mode", help="Verification Mode.\n" + \
-                                        "default: Includes all descendant nodes of two comparing nodes in SMT query. The default value\n" + \
-                                        "intersection: Includes intersection of descendant nodes of two comparing nodes in SMT query.\n" + \
-                                        "hybrid: Tries intersection first. If SAT, then tries default mode.")
+                                        "default: Write SMT Query in terms of the input variables. Only perform node merging.\n" + \
+                                        "intersection: Write SMT Query in terms of common descendants.\n" + \
+                                        "hybrid: Tries intersection first. If SAT, then try default mode.")
 parser.add_argument("--no_alias_analysis", help="Do not perform alias analysis", action="store_true")
-parser.add_argument("--timeout", help="How long should query run before calling it time-out (in seconds?)")
-parser.add_argument("--z3_check_command", help="A specific check-sat-using command for smt query. defaults to (check-sat-using default)")
+parser.add_argument("--timeout", help="How long should query run before timing out (in seconds) ?")
+parser.add_argument("--z3_check_command", help="(Under construction)")
 parser.add_argument("--max_unknown_count", type=int, help="Number of Unknown results to encounter before exiting verification. Defaults to 1")
 parser.add_argument("--gout", help="For generating Report.")
 args = parser.parse_args()

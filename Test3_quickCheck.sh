@@ -37,7 +37,7 @@ echo ""
 
 #ChaCha20_ssse3
 echo "${bold}BENCHMARK: CHACHA-SSE${normal}"
-echo "${bold}Expected result: p1 is equivalent to p2 (Reason: SMT Timeout)${normal}"
+echo "${bold}Expected result: p1 is equivalent to p2${normal}"
 echo "${bold}Expected Required Time: ~51 minutes${normal}"
 python3 main.py --pre test/ChaCha20_ssse3/pre --post test/ChaCha20_ssse3/post --p1 test/ChaCha20_ssse3/dsl --p1lang dsl --p2 test/ChaCha20_ssse3/asm --p2lang asm --verif_mode hybrid --no_alias_analysis --gout result/Test3/chachasse
 echo ""
