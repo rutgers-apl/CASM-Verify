@@ -81,9 +81,9 @@ def ProgLangCodeToProgLangArg(code) :
 # 1. default: Include all descendant nodes of the two comparing nodes when generating SMT query.
 # 2. intersection: Include the intersection of the two comparing nodes' intersections.
 # 3. hybrid: When smt query for intersection gives sat, try default mode.
-verifMode = 1
-verifModeDict = {"default" : 1, "intersection" : 2, "hybrid" : 3}
-verifModelDictRev = {1 : "default", 2 : "intersection", 3 : "hybrid"}
+verifMode = 3
+verifModeDict = {"nodemerge" : 1, "intersection" : 2, "quickcheck" : 3}
+verifModelDictRev = {1 : "nodemerge", 2 : "intersection", 3 : "quickcheck"}
 def VerifModeArgToVerifModeCode(arg) :
     if arg.lower() in verifModeDict :
         return verifModeDict[arg.lower()]
