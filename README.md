@@ -1,4 +1,5 @@
-# CASM_Verify_Artifact
+# CASM_Verify
+CASM_Verify is a tool that automatically checks the equivalence of highly optimized assembly implementation of cryptographic algorithms against a reference implementation. The reference implementation can be another assembly implementation, or an implementation written in our DSL.
 
 ## Installation
 The simplest way to install CASM_Verify is to use the Docker Makefile provided in the repo.
