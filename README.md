@@ -1,22 +1,39 @@
 # CASM_Verify
 CASM_Verify is a tool that automatically checks the equivalence of highly optimized assembly implementation of cryptographic algorithms against a reference implementation. The reference implementation can be another assembly implementation, or an implementation written in our DSL.
 
+
+## Prerequisite
+CASM_Verify requires python3 and the z3 bindings for python3. In ubuntu, the requirements can be installed using the following commands:
+```bash
+$ sudo apt-get install python3 python3-pip
+$ sudo python3 -m pip install z3-solver
+```
+In macOS, use homebrew instead of apt-get:
+```bash
+$ brew install python3
+$ sudo python3 -m pip install z3-solver
+```
+
+To install [z3](https://github.com/Z3Prover/z3) manually instead of using python package manager, follow the instruction in the link provided: [z3](https://github.com/Z3Prover/z3)
+
+
 ## Installation
-The simplest way to install CASM_Verify is to use the Docker Makefile provided in the repo.
 
-### How to install Docker
-Docker provides easy to follow documentation on how to install Docker on various platforms. You can find the instruction for your specific OS by going to https://docs.docker.com/, on the left sidebar, go to "Get Docker" -> "Docker CE" and click the OS for your machine.
+### Installation using Docker
+The simplest way to install CASM_Verify is to use the Docker Makefile provided in the repo. The makefile automatically installs all pre-requisite softwares.
 
-### How to build CASM_Verify Docker Image
-You can create docker image for CASM_Verify by typing the following command in the terminal:
+1) Install Docker: Docker provides easy to follow documentation on how to install Docker on various platforms. You can find the instruction for your specific OS by going to https://docs.docker.com/, on the left sidebar, go to "Get Docker" -> "Docker CE" and click the OS for your machine.
+
+2) Build Docker image: You can create docker image for CASM_Verify by typing the following command in the terminal,
 ```bash
 docker build -t casmverify github.com/jpl169/CASM_Verify_Artifact
 ```
 
-To run docker image, type:
+3) Run casmverify image: To run the docker image, type,
 ```bash
 docker run -it casmverify
 ```
+
 
 ## Testing benchmarks
 We provide bash scripts that automatically runs the command to test CASM_Verify's benchmarks. Since running all CASM_Verify's benchmarks will take well over 24 hours, we divided the entire test cases into small sections.
