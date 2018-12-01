@@ -35,7 +35,7 @@ docker run -it casmverify
 ```
 
 ### Manual Installation
-To manually install CASM-Verify, install the prerequisites, and clone this repository:
+To manually install CASM-Verify, install the [prerequisites](https://github.com/rutgers-apl/CASM-Verify/blob/master/README.md#prerequisite) and clone this repository:
 ```bash
 git clone https://github.com/rutgers-apl/CASM-Verify.git
 ```
