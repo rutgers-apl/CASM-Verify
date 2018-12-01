@@ -34,73 +34,44 @@ docker build -t casmverify github.com/jpl169/CASM_Verify_Artifact
 docker run -it casmverify
 ```
 
-
-## Testing benchmarks
-We provide bash scripts that automatically runs the command to test CASM_Verify's benchmarks. Since running all CASM_Verify's benchmarks will take well over 24 hours, we divided the entire test cases into small sections.
-
-Before executing each benchmark, the scripts will print which test
-case it's running and the expected output: Whether (1) p1 is
-equivalent to p2, (2) p1 is not equivalent to p2. **If CASM_Verify
-experiences SMT Solver timeout, it will report that p1 is not
-equivalent to p2, but also output that it experiences SMT Solver
-timeout.**
-
-If you would like to skip any of the benchmarks in the script, you can
-press ctrl + c to stop the current benchmark and run the next benchmark.
-
-### 0. Micro (Fast) Benchmarks.
-This script contains four benchmarks for quickly testing whether CASM_Verify can correctly verify that an implementation is correct. Estimated time required : ~36 minutes
+### Manual Installation
+To manually install CASM-Verify, install the prerequisites, and clone this repository:
 ```bash
-./Test0_fastBenchmark.sh
+git clone https://github.com/rutgers-apl/CASM-Verify.git
 ```
+Now you're ready to use CASM-Verify.
 
-### 1. OpenSSL Benchmarks with full features of CASM_Verify.
-This experiment tests whether the assembly implementation of cryptographic algorithms found in OpenSSL is correct. This benchmark is equivalent to the Table 1 in Evaluation Section, or the fourth bar in Figure 6. Estimated time required : ~10 hours 30 minutes
+
+## CASM-Verify Usage Example.
+We provide a number of examples (used in our paper) in the "test" folder. We also provide a bash script that automatically runs the verification of these examples:
 ```bash
 ./Test1_benchmark.sh
 ```
 
-### 2. OpenSSL Benchmarks with only Node Merging.
-This experiment is similar to Test1, but only uses the Node Merging feature. This is equivalent to the second bar shown in Figure 6. Estimated time required : ~4 hours 20 minutes
+## Usage
+For the rest of the readme, we will be using the example in test/sha2rnd unless otherwise specified.
+To use CASM-Verify, use the following command:
 ```bash
-./Test2_nodeMergeOnly.sh
+python3 main.py --pre test/sha2rnd/pre --post test/sha2rnd/post --p1 test/sha2rnd/dsl --p1lang dsl --p2 test/sha2rnd/asm --p2lang asm --mem-model 32
 ```
+There are seven important parameters:
+  1) --p1: specifies the file path to the reference implementation.
+  2) --p1lang: specifies whether the reference implementation is written in x86_64 assembly (asm) or in our DSL (dsl).
+  3) --p2: specifies the file path to the target implementation.
+  4) --p2lang: specifies whether the target implementation is written in x86_64 assembly (asm) or in our DSL (dsl).
+  5) --pre: File containing the precondition that specifies the program state at the beginning of p1 and p2.
+  6) --post: File containing the postcondition that specifies which variables have to be equivalent for p1 and p2 to be equivalent.
+  7) --mem-model: specifies how to model the memory. We currently either model the memory as an array of 8-bit values (8) or as an array of 32-bit values (32) for implementations that read/write word-sized values. This parameter is used for translating assembly implementation to our internal DSL.
 
-### 3. OpenSSL Benchmarks with QuickCheck.
-This experiment is similar to Test 1, but uses QuickCheck without Memory Optimization. This is equivalent to the third bar shown in Figure 6. Estimated time required : ~6 hours 21 minutes
+The above example (test/sha2rnd) verifies an assembly implementation against the reference implementation written in our DSL, using a 32-bit value memory model.
+
+We also provide an example that verifies an assembly implementation (ChaCha20 in x86_64 with SSE) against another assembly implementation (ChaCha20 in x86_64) in test/ChaCha20_naive_to_ssse:
 ```bash
-./Test3_quickCheck.sh
+python3 main.py --pre test/ChaCha20_naive_to_ssse/pre --post test/ChaCha20_naive_to_ssse/post --p1 test/ChaCha20_naive_to_ssse/p1 --p1lang asm --p2 test/ChaCha20_naive_to_ssse/p2 --p2lang asm --mem-model 32
 ```
-
-### 4. Buggy Implementations with Common Developer Mistakes.
-This experiment contains benchmarks with buggy implementations with mistakes that developers can make. Estimated time required : ~25 minutes
+and an example that uses an 8-bit value memory model in test/AES_decrypt:
 ```bash
-./Test4_developMistakeBug.sh
+python3 main.py --pre test/AES_decrypt/pre --post test/AES_decrypt/post --p1 test/AES_decrypt/dsl --p1lang dsl --p2 test/AES_decrypt/asm --p2lang asm --mem_model 8
 ```
-
-### 5. Hard to detect Bug
-This experiment contains benchmarks with buggy implementations, where
-random input testing may not be able to detect the bug. Estimated time
-required : ~18 hours 15 minutes
-```bash
-./Test5_hardToFindBug.sh
-```
-
-### 6. Equivalent Implementations
-This experiment contains benchmarks that are mutated from OpenSSL implementations, but is still semantically correct. Estimated time required : ~4 hours 20 minutes
-```bash
-./Test6_additionalEquivalenceTest.sh
-```
-
-### 7. Single Query Benchmark
-This experiment tries to verify the functional correctness of assembly code by creating one large SMT Query instead of using CASM_Verify. Estimated time required : ~120 hours
-```bash
-./Test7_naiveQuery.sh
-```
-
-
-
-
-
 
 
