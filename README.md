@@ -75,4 +75,28 @@ and an example that uses an 8-bit value memory model in test/AES_decrypt:
 python3 main.py --pre test/AES_decrypt/pre --post test/AES_decrypt/post --p1 test/AES_decrypt/dsl --p1lang dsl --p2 test/AES_decrypt/asm --p2lang asm --mem_model 8
 ```
 
+## Domain Specific Language (DSL)
+We provide an imperative C-like DSL to write the reference implementation, precondition, and the postcondition. We are actively refining our DSL to be more user friendly. To illustrate the features of our DSL, here is a code snippet of test/sha2rnd/dsl:
+```
+function SIGMA0(a) {
+return (a >>> 2) ^ (a >>> 13) ^ (a >>> 22);
+}
+function CH(x, y, z) {
+return (x & y) ^ (!x & z);
+}
+...
 
+for (i from 0 to 1) {
+	w[i] = m[i];
+	sigma1 = SIGMA1(e);
+	ch = CH(e,f,g);
+	t1 = h + sigma1 + ch + k[i] + w[i];
+...
+}
+```
+`Variables (i.e. a)`: All variables are implicitly declared and they are integers. By default, they are 32-bit integers. If you need a different sized integers, use the format var:size, i.e. x:64 is a 64-bit integer named x. Constants are defaulted to 32-bit integers. Similar to variables, you can declare different sizes of constants, i.e. 1553:40 is a 40-bit integer representing the value 1553.
+`Arrays (i.e. w[i])`: Like variables, arrays use 32-bit indices and hold 32-bit values by default. If you need different sized arrays, use the format name:s1\[index:s2\], i.e. mem:8\[addr:64\] is an array named mem, which uses 64-bit indices and returns 8-bit values.
+`Loops`: Our DSL only allows a fixed-iteration for loop. CASM-verify internally unroll the for loop.
+`Function`: our DSL supports mathematical functions. CASM-verify internally inlines the function.
+
+## Precondition
