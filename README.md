@@ -42,7 +42,7 @@ git clone https://github.com/rutgers-apl/CASM-Verify.git
 Now you're ready to use CASM-Verify.
 
 
-## CASM-Verify Usage Example.
+## CASM-Verify Benchmarks.
 We provide a number of examples (used in our paper) in the "test" folder. We also provide a bash script that automatically runs the verification of these examples:
 ```bash
 ./Test1_benchmark.sh
