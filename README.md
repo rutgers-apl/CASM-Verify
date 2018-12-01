@@ -75,7 +75,11 @@ and an example that uses an 8-bit value memory model in test/AES_decrypt:
 python3 main.py --pre test/AES_decrypt/pre --post test/AES_decrypt/post --p1 test/AES_decrypt/dsl --p1lang dsl --p2 test/AES_decrypt/asm --p2lang asm --mem_model 8
 ```
 
-## Domain Specific Language (DSL)
+## Details
+### Assembly Implementation
+CASM-Verify accepts AT&T syntax of assembly instructions. Although CASM-Verify can accept a wide variety of instructions, it does not reason about all instructions (notably, jump instructions and labels). Whenever CASM-Verify encounters an instruction it cannot reason about, it will notify the user of the instruction.
+
+### Domain Specific Language (DSL)
 We provide an imperative C-like DSL to write the reference implementation, precondition, and the postcondition. We are actively refining our DSL to be more user friendly. To illustrate the features of our DSL, here is a code snippet of test/sha2rnd/dsl:
 ```
 function SIGMA0(a) {
@@ -99,4 +103,7 @@ for (i from 0 to 1) {
 `Loops`: Our DSL only allows a fixed-iteration for loop. CASM-verify internally unroll the for loop.
 `Function`: our DSL supports mathematical functions. CASM-verify internally inlines the function.
 
-## Precondition
+### Precondition
+
+
+### Postcondition
