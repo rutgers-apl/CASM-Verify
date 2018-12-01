@@ -50,7 +50,8 @@ We provide a number of examples (used in our paper) in the "test" folder. We als
 
 ## Usage
 For the rest of the readme, we will be using the example in test/sha2rnd unless otherwise specified.
-To use CASM-Verify, use the following command:
+
+To verify the assembly implementation(test/sha2rnd/asm) using CASM-Verify, use the following command:
 ```bash
 python3 main.py --pre test/sha2rnd/pre --post test/sha2rnd/post --p1 test/sha2rnd/dsl --p1lang dsl --p2 test/sha2rnd/asm --p2lang asm --mem-model 32
 ```
