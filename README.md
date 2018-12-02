@@ -145,3 +145,18 @@ specifies that the variable *a* from *p1* and register *eax* from *p2* are equiv
 </details>
 
 ### Postcondition
+<details><summary>Click to see details</summary>
+<p>
+
+The postcondition specifies which variables should be equivalent after executing p1 and p2:
+```
+P1.a == P2.r10d;
+P1.b == P2.r11d;
+...
+```
+The main goal of CASM-Verify is to verify the postcondition.
+
+</p>
+</details>
+
+
