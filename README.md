@@ -76,10 +76,20 @@ python3 main.py --pre test/AES_decrypt/pre --post test/AES_decrypt/post --p1 tes
 ```
 
 ## Details
-### Assembly Implementation
+
+### Assembly Implementations
+<details><summary>Click to see details</summary>
+<p>
+
 CASM-Verify accepts AT&T syntax of assembly instructions. Although CASM-Verify can accept a wide variety of instructions, it does not reason about all instructions (notably, jump instructions and labels). Whenever CASM-Verify encounters an instruction it cannot reason about, it will notify the user of the instruction.
 
+</p>
+</details>
+
 ### Domain Specific Language (DSL)
+<details><summary>Click to see details</summary>
+<p>
+
 We provide an imperative C-like DSL to write the reference implementation, precondition, and the postcondition. We are actively refining our DSL to be more user friendly. To illustrate the features of our DSL, here is a code snippet of test/sha2rnd/dsl:
 ```
 function SIGMA0(a) {
@@ -103,7 +113,35 @@ for (i from 0 to 1) {
 `Loops`: Our DSL only allows a fixed-iteration for loop. CASM-verify internally unroll the for loop.
 `Function`: our DSL supports mathematical functions. CASM-verify internally inlines the function.
 
-### Precondition
+</p>
+</details>
 
+### Precondition
+<details><summary>Click to see details</summary>
+<p>
+
+CASM-Verify requires information about the initial program states of p1 and p2 through Precondition. Because of possible ambiguity between variable names in p1 and p2, all variables in Precondition and Postcondition must be prepended with "P1." if the variable is from p1 and "P2." if the variable is from p2. For example, precondition test/sha2rnd/pre,
+```
+@Data{P2.rbp:64, P2.rbp:64 ~ P2.rbp:64 + 7:64};
+...
+
+P1.a == P2.eax; 
+P1.b == P2.ebx;
+...
+P2.mem[P2.rbp:64] == 0xe49b69c1;
+...
+P1.m[0] == P2.mem[P2.rsi:64];
+...
+```
+specifies that the variable *a* from *p1* and register *eax* from *p2* are equivalent. Additionally,  
+
+`@Data`: Describes the data regions in the memory used by assembly implementations.  
+	1) Argument #1: Which register points to the region. (i.e. P2.rbp:64 says this data region is pointed by the register rbp)  
+	2) Argument #2: What is the range of the regions? (i.e. The size of the region is 8 bytes starting from rbp)  
+	
+`mem[]`: Array "mem" is registered to be used for the memory model for the assembly implementations. To describe the content of the memory, use mem.
+
+</p>
+</details>
 
 ### Postcondition
