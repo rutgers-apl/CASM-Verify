@@ -154,7 +154,7 @@ P1.a == P2.r10d;
 P1.b == P2.r11d;
 ...
 ```
-The main goal of CASM-Verify is to verify the postcondition.
+The postcondition can compare between values in arrays as well, similar to precondition.
 
 </p>
 </details>
