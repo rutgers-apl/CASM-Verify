@@ -1,6 +1,10 @@
 # CASM_Verify
 CASM_Verify is a tool that automatically checks the equivalence of highly optimized assembly implementation of cryptographic algorithms against a reference implementation. The reference implementation can be another assembly implementation, or an implementation written in our DSL.
 
+You can read more about our approach in the following paper:
+
+[Automatic Equivalence Checking for Assembly Implementations of Cryptography Libraries](https://www.cs.rutgers.edu/~santosh.nagarakatte/papers/cgo19-casmverify-preprint.pdf)
+
 
 ## Prerequisite
 CASM_Verify requires python3 and the z3 bindings for python3. In ubuntu, the requirements can be installed using the following commands:
