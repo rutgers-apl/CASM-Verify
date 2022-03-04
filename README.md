@@ -1,9 +1,16 @@
 # CASM_Verify
-CASM_Verify is a tool that automatically checks the equivalence of highly optimized assembly implementation of cryptographic algorithms against a reference implementation. The reference implementation can be another assembly implementation, or an implementation written in our DSL.
+
+CASM_Verify is a tool that automatically checks the equivalence of
+highly optimized assembly implementation of cryptographic algorithms
+against a reference implementation. The reference implementation can
+be another assembly implementation, or an implementation written in
+our DSL.
 
 You can read more about our approach in the following paper:
 
-[Automatic Equivalence Checking for Assembly Implementations of Cryptography Libraries](https://www.cs.rutgers.edu/~santosh.nagarakatte/papers/cgo19-casmverify-preprint.pdf)
+[Automatic Equivalence Checking for Assembly Implementations of
+Cryptography
+Libraries @ CGO 2019](https://www.cs.rutgers.edu/~santosh.nagarakatte/papers/cgo19-casmverify-preprint.pdf)
 
 
 ## Prerequisite
